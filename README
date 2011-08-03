@@ -1,1 +1,49 @@
 Repository of Magento Tools from Pulse Storm LLC
+==================================================	
+
+This repository contains open source code modules and scripts to help developers work more efficiently with the Magento Ecommerce system.  They're provided free of charge by Pulse Storm LLC.  If you've found them useful you may find Pulse Storm's commercial extensions and knowledge products useful as well 
+
+	http://store.pulsestorm.net/
+
+You can find Pulse Storm on the web at http://www.pulsestorm.net/
+
+Build Instructions
+--------------------------------------------------
+The folder structure of this repository mirrors a standard Magento community edition install.  To build individual modules, simply run to the bash build scripts located at the root of the project
+
+	$ cd /path/to/checkout
+	$ ./build_developer_manual.bash
+	
+After running, you'll find a tar archive in the
+
+	var/build/
+	
+folder.  This archive is **not** a Magento Connect module.  Rather, it's an archive that contains all the files you'll need to manually install in your system.	
+
+Included Modules
+--------------------------------------------------
+
+###Layout Unremove
+
+The Layout Unremove module allows you to, via Layout Update XML scripts, undo the effects of a previously executed &lt;remove/&gt; tag.
+
+Original Post: http://alanstorm.com/magento_layout_unremove_in_local_xml
+
+###Developer Manual
+
+The Developer Manual extension allows you to, in real time, query your system for which action methods are available via a particular block tag.  Additional reference materials are planned. 
+
+Original Post: http://alanstorm.com/magento_action_layout_reference
+
+###Module List
+
+The Module List Module provides you with a list of enabled and disable modules, as well as some simple tools for debugging your own module installation issues.  Module here refers to Magento Code Modules, which are separate from Magento Connect Extensions. 
+
+Original Post: http://alanstorm.com/magento_list_module
+
+###System Config Search
+
+The system configuration search enhances the Admin Console UI and allows you to search for specific configuration fields
+
+Original Post: http://alanstorm.com/magento_configuration_search
+
