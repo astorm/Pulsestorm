@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Alanstormdotcom_Xuacompatible>
+			<version>0.1.0</version>
+		</Alanstormdotcom_Xuacompatible>
+	</modules>
+	<frontend>
+		<routers>
+			<alanstormdotcom_xuacompatible>
+				<use>standard</use>
+				<args>
+					<module>Alanstormdotcom_Xuacompatible</module>
+					<frontName>alanstormdotcom_xuacompatible</frontName>
+				</args>
+			</alanstormdotcom_xuacompatible>
+		</routers>
+	</frontend>
+	<global>
+		<blocks>
+			<alanstormdotcom_xuacompatible>
+				<class>Alanstormdotcom_Xuacompatible_Block</class>
+			</alanstormdotcom_xuacompatible>
+		</blocks>
+		<models>
+			<alanstormdotcom_xuacompatible>
+				<class>Alanstormdotcom_Xuacompatible_Model</class>
+			</alanstormdotcom_xuacompatible>
+		</models>
+		<helpers>
+			<alanstormdotcom_xuacompatible>
+				<class>Alanstormdotcom_Xuacompatible_Helper</class>
+			</alanstormdotcom_xuacompatible>
+		</helpers>
+		
+		<events>
+			<http_response_send_before>
+				<observers>
+					<alanstormdotcom_xuacompatible_apply_tag>
+						<type>singleton</type>
+						<class>Alanstormdotcom_Xuacompatible_Model_Observer</class>
+						<method>applyTag</method>
+					</alanstormdotcom_xuacompatible_apply_tag>
+				</observers>
+			</http_response_send_before>
+		</events>			
+	</global>
+</config>
