@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Modulelist>
+			<version>0.1.0</version>
+		</Pulsestorm_Modulelist>
+	</modules>
+	<admin>
+		<routers>
+			<pulsestorm_modulelist>
+				<use>admin</use>
+				<args>
+					<module>Pulsestorm_Modulelist</module>
+					<frontName>pulsestorm_modulelist</frontName>
+				</args>
+			</pulsestorm_modulelist>
+		</routers>
+	</admin>
+	
+	<global>
+		<blocks>
+			<pulsestorm_modulelist>
+				<class>Pulsestorm_Modulelist_Block</class>
+			</pulsestorm_modulelist>
+		</blocks>
+		<models>
+			<pulsestorm_modulelist>
+				<class>Pulsestorm_Modulelist_Model</class>
+			</pulsestorm_modulelist>
+		</models>
+		<helpers>
+			<pulsestorm_modulelist>
+				<class>Pulsestorm_Modulelist_Helper</class>
+			</pulsestorm_modulelist>
+		</helpers>
+	</global>
+</config>

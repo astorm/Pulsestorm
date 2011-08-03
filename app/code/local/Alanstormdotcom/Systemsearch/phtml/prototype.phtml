@@ -1,0 +1,137 @@
+<script type="text/javascript">	
+	var Alanstormdotcom_Systemsearch = Class.create({
+		pointToItem:function(area,label)
+		{
+			//console.log('Pointing to area ['+area+']with label ['+label+']');
+			if(area == 'nav')
+			{
+				return this.pointToNavItemMenu(label);
+			}
+			else if(area == 'group')
+			{
+				return this.pointToGroup(label);
+			}
+		},
+		pointToGroup:function(label)
+		{
+			var link = this.getLink('.entry-edit-head a',label);			
+			if(!link) { return;}
+			var eo = 10;
+			var arrow = this.getArrow('right');			
+			arrow.setStyle({'display':'block','position':'absolute','left':link.cumulativeOffset()[0]-eo-arrow.getDimensions().width+'px','top':link.cumulativeOffset()[1]+'px','zIndex':'2'});
+			return arrow;
+		},
+		pointToNavItemMenu:function(label)
+		{
+			var link = this.getLink('#system_config_tabs dd a',label);			
+			if(!link) { return;}
+			var arrow = this.getArrow();			
+			arrow.setStyle({'display':'block','position':'absolute','left':link.cumulativeOffset()[0]+link.getDimensions().width+'px','top':link.cumulativeOffset()[1]+'px','zIndex':'2'});			
+			//Effect.Shake('alanstormdotcom_alanstormdotcomsystemsearch_arrow');			
+			return arrow;
+		},
+		
+		getLink:function(selector, label)
+		{
+			var link = $$(selector).findAll(function(e){ return e.innerHTML.indexOf(label) != -1;})[0];				
+			return link;
+		},		
+		getArrow:function(direction)
+		{
+			direction = direction ? direction : 'left';
+			Alanstormdotcom_Systemsearch.arrowCount++;
+			var arrow_id = 'alanstormdotcom_alanstormdotcomsystemsearch_arrow'+'_'+Alanstormdotcom_Systemsearch.arrowCount;
+			if(!$(arrow_id))
+			{
+				var arrow = new Element('img');			
+				arrow.writeAttribute({'id':arrow_id,'src':'/skin/adminhtml/default/default/images/alanstormdotcom/'+direction+'.gif'});
+				arrow.setStyle({'display':'none'});
+				arrow.makePositioned();
+				arrow.addClassName('alanstormdotcom_alanstormdotcomsystemsearch_arrows');
+				$$('body')[0].appendChild(arrow);				
+			}						
+			arrow = $(arrow_id);						
+			return arrow;
+		}
+		
+	});
+	Alanstormdotcom_Systemsearch.clearResults = function()
+	{
+		Alanstormdotcom_Systemsearch.searchData = {};
+		Alanstormdotcom_Systemsearch.removeArrows();
+		$('alanstormdotcom_alanstormdotcomsystemsearch_form_results').innerHTML = '';		
+	}
+	
+	Alanstormdotcom_Systemsearch.removeArrows = function()
+	{
+		$$('.alanstormdotcom_alanstormdotcomsystemsearch_arrows').each(function(e){
+			e.remove();
+		});	
+	}
+	Alanstormdotcom_Systemsearch.refreshArrowsWithoutJiggle = function()
+	{
+		Alanstormdotcom_Systemsearch.jiggle = false;
+		Alanstormdotcom_Systemsearch.refreshArrows();
+		Alanstormdotcom_Systemsearch.jiggle = true;
+	}
+	
+	Alanstormdotcom_Systemsearch.refreshArrows = function()
+	{		
+		//hide the old, re add the new.  
+		Alanstormdotcom_Systemsearch.removeArrows();
+		var r = Alanstormdotcom_Systemsearch.searchData;
+		if(!r.results){ return;}
+		var a = new Alanstormdotcom_Systemsearch();		
+		r.results.each(function(e){
+			var arrow;
+			arrow = a.pointToItem(e.found_type,e.found_label);								
+			if(arrow && Alanstormdotcom_Systemsearch.jiggle)
+			{
+				Effect.ShakeBetter(arrow.id);
+			}
+		});
+		
+	}
+	Alanstormdotcom_Systemsearch.arrowCount = 0;
+	Alanstormdotcom_Systemsearch.showText 	= false;
+	Alanstormdotcom_Systemsearch.jiggle		= true;
+	Alanstormdotcom_Systemsearch.searchData	= {};
+	
+	//Fixes Shake's breaking position:absolute
+	if(window.Effect)
+	{
+		Effect.ShakeBetter = function(element) {
+		  element = $(element);
+		  var oldStyle = {
+			top: element.getStyle('top'),
+			left: element.getStyle('left'),
+			position: element.getStyle('position')};
+			return new Effect.Move(element, 
+			  { x:  20, y: 0, duration: 0.05, afterFinishInternal: function(effect) {
+			new Effect.Move(effect.element,
+			  { x: -40, y: 0, duration: 0.1,  afterFinishInternal: function(effect) {
+			new Effect.Move(effect.element,
+			  { x:  40, y: 0, duration: 0.1,  afterFinishInternal: function(effect) {
+			new Effect.Move(effect.element,
+			  { x: -40, y: 0, duration: 0.1,  afterFinishInternal: function(effect) {
+			new Effect.Move(effect.element,
+			  { x:  40, y: 0, duration: 0.1,  afterFinishInternal: function(effect) {
+			new Effect.Move(effect.element,
+			  { x: -20, y: 0, duration: 0.05, afterFinishInternal: function(effect) {
+				effect.element.undoPositioned().setStyle(oldStyle);
+		  }}) }}) }}) }}) }}) }});
+		}	
+	}	
+	
+	document.observe("dom:loaded", function() {
+	
+		//ensure arrows stay refreshed when we do a collapsable
+		$$('div.collapseable a').each(function(e){
+			e.observe('click',Alanstormdotcom_Systemsearch.refreshArrowsWithoutJiggle);
+		});
+		// var a = new Alanstormdotcom_Systemsearch();
+		//a.pointToItem('nav','Inventory');				
+		//a.pointToItem('group','Locale options');				
+	});
+</script>
+

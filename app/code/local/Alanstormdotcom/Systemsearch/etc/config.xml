@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Alanstormdotcom_Systemsearch>
+			<version>0.1.0</version>
+		</Alanstormdotcom_Systemsearch>
+	</modules>
+
+     <admin>
+         <routers>
+             <adminhtml>
+                 <args>
+                     <modules>
+                         <alanstormdotcomsystemsearch before="Mage_Adminhtml">Alanstormdotcom_Systemsearch_Adminhtml</alanstormdotcomsystemsearch>
+                     </modules>
+                 </args>
+             </adminhtml>
+         </routers>
+     </admin>
+
+<!-- 
+	<frontend>
+		<routers>
+			<systemsearch>
+				<use>standard</use>
+				<args>
+					<module>Alanstormdotcom_Systemsearch</module>
+					<frontName>systemsearch</frontName>
+				</args>
+			</systemsearch>
+		</routers>
+	</frontend>
+ -->
+
+	<global>
+			<models>
+				<alanstormdotcomsystemsearch>
+					<class>Alanstormdotcom_Systemsearch_Model</class>
+				</alanstormdotcomsystemsearch>
+			</models>
+			
+			<blocks>
+				<alanstormdotcomsystemsearch>
+					<class>Alanstormdotcom_Systemsearch_Block</class>
+				</alanstormdotcomsystemsearch>
+			</blocks>			
+			
+			<helpers>
+				<alanstormdotcomsystemsearch>
+					<class>Alanstormdotcom_Systemsearch_Helper</class>
+				</alanstormdotcomsystemsearch>
+			</helpers>			
+	</global>
+	
+	
+	<adminhtml>
+		<events>
+			<http_response_send_before>
+				<observers>
+					<unique_name>
+						<type>singleton</type>
+						<class>alanstormdotcomsystemsearch/observer</class>
+						<method>addSystemsearchInit</method>
+					</unique_name>
+				</observers>
+			</http_response_send_before>
+		</events>
+	</adminhtml>
+
+</config>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Alanstormdotcom_Developermanual>
+			<version>1.0.1</version>
+		</Alanstormdotcom_Developermanual>
+	</modules>
+	
+	<admin>
+		<routers>
+			<alanstormdotcom_developermanual>
+				<use>admin</use>
+				<args>
+					<module>Alanstormdotcom_Developermanual</module>
+					<frontName>developermanual</frontName>
+				</args>
+			</alanstormdotcom_developermanual>
+		</routers>
+	</admin>
+	
+	
+	<frontend>
+		<routers>
+			<alanstormdotcom_developermanual>
+				<use>standard</use>
+				<args>
+					<module>Alanstormdotcom_Developermanual</module>
+					<frontName>alanstormdotcom_developermanual</frontName>
+				</args>
+			</alanstormdotcom_developermanual>
+		</routers>
+	</frontend>
+	<global>
+		<blocks>
+			<alanstormdotcom_developermanual>
+				<class>Alanstormdotcom_Developermanual_Block</class>
+			</alanstormdotcom_developermanual>
+		</blocks>
+		<models>
+			<alanstormdotcom_developermanual>
+				<class>Alanstormdotcom_Developermanual_Model</class>
+			</alanstormdotcom_developermanual>
+		</models>
+		<helpers>
+			<alanstormdotcom_developermanual>
+				<class>Alanstormdotcom_Developermanual_Helper</class>
+			</alanstormdotcom_developermanual>
+		</helpers>
+	</global>
+	
+	
+    <adminhtml>
+        <menu>
+            <developermanual translate="title" module="alanstormdotcom_developermanual">
+                <title>Developer Manual</title> 
+                <sort_order>9999</sort_order>
+                <children>
+                    <block_actions module="alanstormdotcom_developermanual">
+                        <title>Block Actions</title> 
+                        <action>developermanual/index/blockLayoutactionsReference</action>
+                    </block_actions>
+
+                    <about module="alanstormdotcom_developermanual">
+                        <title>Resources</title> 
+                        <action>developermanual/index/resources</action>
+                    </about>                   
+                    
+                    <about module="alanstormdotcom_developermanual">
+                        <title>About</title> 
+                        <action>developermanual/index/about</action>
+                    </about>                    
+                </children>
+            </developermanual>
+        </menu> 
+    </adminhtml>	
+</config>

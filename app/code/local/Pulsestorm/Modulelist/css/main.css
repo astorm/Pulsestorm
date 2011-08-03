@@ -1,0 +1,59 @@
+table.pulsestorm_modulelist,
+table.pulsestorm_modulelist th,
+table.pulsestorm_modulelist td,
+table.pulsestorm_modulelist tr
+{
+    border-collapse:collapse;
+    border:1px solid #d0dbb3;
+}
+
+table.pulsestorm_modulelist th
+{
+    font-weight:bold;
+    background-color:#f1f7e2;
+}
+
+table.pulsestorm_modulelist th, table.pulsestorm_modulelist td
+{
+    font-size:12px;
+    padding:8px 10px;
+}
+
+/*
+.pulsestorm_modulelist td,.pulsestorm_modulelist th
+{
+	padding:.2em 0 .2em .5em;
+}
+*/
+.pulsestorm_modulelist_name
+{
+	width:20em;
+}
+
+.pulsestorm_modulelist_active
+{
+	width:4em;
+}
+
+.pulsestorm_modulelist_path
+{
+	width:50em;
+}
+
+.pulsestorm_modulelist_no
+{
+	background-color:#f00;
+	color:#fff;
+}
+
+div#pulsestorm_modulelist_content p, div#pulsestorm_modulelist_content code.quoted
+{
+	display:block;
+	padding:0 0 .5em 4em;	
+}
+
+div#pulsestorm_modulelist_content p, div#pulsestorm_modulelist_content p 
+{
+	padding:0 0 .5em 0;
+	margin:0;
+}

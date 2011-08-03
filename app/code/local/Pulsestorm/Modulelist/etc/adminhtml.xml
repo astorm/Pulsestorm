@@ -1,0 +1,13 @@
+<config>
+	<menu>
+		<system>
+			<children>
+				<first_page module="pulsestorm_modulelist">
+					<title>Module List</title> 
+					<action>pulsestorm_modulelist/index/index</action>
+					<sort_order>9999</sort_order>
+				</first_page>
+			</children>
+		</system>
+	</menu> 
+</config>

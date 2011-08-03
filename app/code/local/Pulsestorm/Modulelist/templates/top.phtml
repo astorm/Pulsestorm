@@ -1,0 +1,60 @@
+<?php
+	$report 		= $this->getReport();
+	$report_infered = $this->getReportInfered();
+?>
+<div id="pulsestorm_modulelist_content">
+	<h1>Module List</h1>
+	
+	<h2>core</h2>
+	<?php echo $this->createTableBlock($report->getCoreList())->_toHtml(); ?>
+	
+	<h2>community</h2>
+	<?php echo $this->createTableBlock($report->getCommunityList())->_toHtml(); ?>
+	
+	
+	<h2>local</h2>
+	<?php echo $this->createTableBlock($report->getLocalList())->_toHtml(); ?>
+	
+	<h2>Warnings</h2>
+	
+	<h3>Inferred but Missing</h3>
+	
+	<?php if(!$report_infered->getInferedButMissing()): ?>
+	<p>
+		<em>All is well, no missing inferred modules were found.</em>
+	</p>
+	<?php else: ?>
+		<ul>
+		<?php foreach($report_infered->getInferedButMissing() as $item): ?>
+			<li><p>A module with the name <code><?php echo $item->getModuleName();?></code> was inferred from </p>
+			<code class="quoted">    <?php echo $item->getFromFolder();?></code>
+			<p>but is not configured in <code>etc/modules</code></p></li>
+		<?php endforeach; ?>
+		</ul>
+	<?php endif;?>
+
+	<h3>Duplicate Module Folders</h3>
+	
+	<p>
+		Duplicate Module Folders reports on inferred modules defined in multiple code pools.  This may indicate an error, or may indicate a deliberate class codepool override (which should be an error, but you'll never stop).
+	</p>
+
+	<?php if($conflicts = $report_infered->getInferedConflicts()): ?>
+		<?php foreach($conflicts as $item): ?>
+		<p>The inferred module <code><?php echo $item->getModuleName(); ?></code> is defined in multiple code pools.</p>
+		<?php foreach($item->paths as $path): ?>
+			<code class="quoted"><?php echo $path;?></code>
+		<?php endforeach;?>
+		<?php endforeach; ?>
+	<?php else: ?>
+		<p><em>All is well, no duplicates detected.</em></p>
+	<?php endif; ?>
+	
+	<?php if($unknown = $report->getUnknownCodePools()): ?>
+	<h3>Unknown Code Pools</h3>
+	<p>
+		<strong>Found unknown codepools</strong>: <?php echo implode(',',$unknown);?>
+	</p>
+	
+	<?php endif;?>
+</div>

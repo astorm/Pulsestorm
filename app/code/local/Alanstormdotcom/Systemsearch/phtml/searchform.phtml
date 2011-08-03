@@ -1,0 +1,38 @@
+<?php
+	$url_action = Mage::getModel('adminhtml/url')->getUrl('*/alanstormdotcomsystemsearch/searchForConfig');
+?>
+<form id="alanstormdotcom_alanstormdotcomsystemsearch_form" action="<?php echo $url_action;?>" method="get">
+	<ul>
+		<li><label for="search_terms"><strong>Find Config</strong>:</label>
+		<input type="text" name="search_terms" />
+		<button type="submit" value="Find Config" class="button">Find Config</button>
+		<button type="submit" value="Find Config With Text Results" onclick="Alanstormdotcom_Systemsearch.showText=true;" class="button">Find Config With Text Results</button>
+		<button class="button" onclick="Alanstormdotcom_Systemsearch.clearResults();return false;">Clear Results</button>
+		<div id="alanstormdotcom_alanstormdotcomsystemsearch_form_results"></div>
+		</li>
+	</ul>
+</form>
+<br />
+<script type="text/javascript">
+	document.observe("dom:loaded", function() {
+		$('alanstormdotcom_alanstormdotcomsystemsearch_form').observe('submit',function(e){
+			e.stop();			
+			$('alanstormdotcom_alanstormdotcomsystemsearch_form_results').innerHTML = '';
+			var r = new Ajax.Request($('alanstormdotcom_alanstormdotcomsystemsearch_form').action,{
+			method:'get',
+			parameters:{search_terms:$('alanstormdotcom_alanstormdotcomsystemsearch_form').search_terms.value},
+			onSuccess:function(r){
+				r = r.responseText.evalJSON();						
+				if(Alanstormdotcom_Systemsearch.showText)
+				{
+					$('alanstormdotcom_alanstormdotcomsystemsearch_form_results').innerHTML = r.responseText; //this first, so as not to throw off height								
+					Alanstormdotcom_Systemsearch.showText = false;
+				}
+				Alanstormdotcom_Systemsearch.searchData = r;
+				Alanstormdotcom_Systemsearch.refreshArrows();				
+
+			}})
+		});
+	});
+	
+</script>

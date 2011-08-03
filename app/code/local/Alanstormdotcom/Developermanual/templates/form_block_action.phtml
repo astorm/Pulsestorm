@@ -1,0 +1,36 @@
+<?php
+	$url_action = Mage::getModel('adminhtml/url')->getUrl('*/index/blockLayoutactionsReferenceAjax');
+?>
+<h1>Block Action Reference</h1>
+
+<p>
+Watch <a href="http://www.youtube.com/watch?v=3icE3-rNaOE">the screencast</a> for instructions on using the Block Action Reference.
+</p>
+
+<form id="alanstormdotcom_developermanual_form_block_action_reference" method="get" action="<?php echo $url_action; ?>">
+	<div>		
+		<pre style="display:inline">&lt;block type=" <input type="text" name="alias" value="core/template" /> "/&gt;</pre> 
+		<button type="submit" value="<?php echo $this->__('Get Action Methods'); ?>" class="button">
+		<?php echo $this->__('Get Action Methods'); ?>
+	</button>
+	</div>
+</form>
+
+<div id="alanstormdotcom_developermanual_form_results">
+</div>
+
+<script type="text/javascript">
+	document.observe("dom:loaded", function() {
+		$('alanstormdotcom_developermanual_form_block_action_reference').observe('submit',function(e){
+			e.stop();			
+			$('alanstormdotcom_developermanual_form_results').innerHTML = '';
+			var r = new Ajax.Request($('alanstormdotcom_developermanual_form_block_action_reference').action,{
+			method:'get',
+			parameters:{alias:$('alanstormdotcom_developermanual_form_block_action_reference').alias.value},
+			onSuccess:function(r){
+				$('alanstormdotcom_developermanual_form_results').innerHTML = r.responseText; //this first, so as not to throw off height												
+			}})
+		});
+	});
+	
+</script>
