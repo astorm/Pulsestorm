@@ -47,6 +47,11 @@ The system configuration search enhances the Admin Console UI and allows you to 
 
 Original Post: http://alanstorm.com/magento_configuration_search
 
+###X-UA-Compatible
+
+A quick and dirty module that inserts a X-UA-Compatible meta head to force IE 9 into IE 8 compatability mode.  Useful for users who are stuck on an older version of Magento, and/or can't manually upgrade Prototype JS. 
+
+
 /**
 * Open Source Initiative OSI - The MIT License (MIT):Licensing
 * 
