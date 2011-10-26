@@ -51,6 +51,11 @@ Original Post: http://alanstorm.com/magento_configuration_search
 
 A quick and dirty module that inserts a X-UA-Compatible meta head to force IE 9 into IE 8 compatability mode.  Useful for users who are stuck on an older version of Magento, and/or can't manually upgrade Prototype JS. 
 
+###Layout Viewer
+
+Implements a query string based way to view layout information for a particular request. 
+
+Original Post: http://alanstorm.com/layouts_blocks_and_templates
 
 /**
 * Open Source Initiative OSI - The MIT License (MIT):Licensing
