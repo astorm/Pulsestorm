@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Alanstormdotcom_Layoutviewer>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Alanstormdotcom_Layoutviewer>
+	</modules>
+</config>
