@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Alanstormdotcom_Systemsearch>
-			<active>true</active>
+			<active>false</active>
 			<codePool>local</codePool>
 		</Alanstormdotcom_Systemsearch>
 	</modules>
