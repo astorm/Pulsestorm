@@ -7,6 +7,12 @@ This repository contains open source code modules and scripts to help developers
 
 You can find Pulse Storm on the web at http://www.pulsestorm.net/
 
+IMPOTANT: Module enabling files in 
+
+    app/etc/modules
+    
+default to **false**, which means the extension will not be loaded by default.  Changing this values to **true** will enable the module.    
+
 Build Instructions
 --------------------------------------------------
 The folder structure of this repository mirrors a standard Magento community edition install.  To build individual modules, simply run to the bash build scripts located at the root of the project
