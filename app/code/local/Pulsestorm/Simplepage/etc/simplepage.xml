@@ -1,0 +1,12 @@
+<config>
+    <pulsestorm_simplepage_routes>
+        <a_uniquely_identified_node_name_maybe_use_your_package_namespace>
+            <url_regex><![CDATA[^test/page]]></url_regex>
+            <view>hello</view>
+<!-- 
+            <module></module>
+            <block_class></block_class>
+ -->
+        </a_uniquely_identified_node_name_maybe_use_your_package_namespace>    
+    </pulsestorm_simplepage_routes>
+</config>

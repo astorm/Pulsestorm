@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Simplepage>
+			<version>0.1.0</version>
+		</Pulsestorm_Simplepage>
+	</modules>
+	<frontend>
+		<routers>
+			<pulsestorm_simplepage>
+				<use>standard</use>
+				<args>
+					<module>Pulsestorm_Simplepage</module>
+					<frontName>pulsestorm_simplepage</frontName>
+				</args>
+			</pulsestorm_simplepage>
+		</routers>
+    
+	</frontend>
+	<global>
+		<blocks>
+			<pulsestorm_simplepage>
+				<class>Pulsestorm_Simplepage_Block</class>
+			</pulsestorm_simplepage>
+		</blocks>
+		<models>
+			<pulsestorm_simplepage>
+				<class>Pulsestorm_Simplepage_Model</class>
+			</pulsestorm_simplepage>
+		</models>
+		<helpers>
+			<pulsestorm_simplepage>
+				<class>Pulsestorm_Simplepage_Helper</class>
+			</pulsestorm_simplepage>
+		</helpers>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <pulsestorm_simplepage>
+                        <class>Pulsestorm_Simplepage_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </pulsestorm_simplepage>
+                </observers>
+            </controller_front_init_routers>
+        </events>		
+	</global>
+</config>
