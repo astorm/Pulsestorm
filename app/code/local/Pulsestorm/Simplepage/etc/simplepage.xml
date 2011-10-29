@@ -1,12 +1,66 @@
 <config>
     <pulsestorm_simplepage_routes>
+    
+        <!-- this is the minimum configuration for a route -->
         <a_uniquely_identified_node_name_maybe_use_your_package_namespace>
-            <url_regex><![CDATA[^test/page]]></url_regex>
+            <url_regex><![CDATA[^test/(?P<foo>page)]]></url_regex>
             <view>hello</view>
-<!-- 
-            <module></module>
-            <block_class></block_class>
- -->
         </a_uniquely_identified_node_name_maybe_use_your_package_namespace>    
+        
+        <!-- <another_example> -->
+            <!-- ############################################# -->
+            <!-- <url_regex/>: This a regular expression that the Simple Page module
+            will use to match against a url.  The first match wins, so learn how to use
+            depends in your app/etc/module/*.xml file.  It doesn't NEED to be in a CDATA
+            container, but it's easiest to always use it in case your reg-ex needs reserved
+            characters (such as <foo> for named pattern matching).  
+            
+            Speaking of pattern matching, this reg ex below will be used in a regular expression
+            function call like this
+            
+                preg_match('#'.$regex.'#', $path, $params)
+                
+            The pattern matching array will be avaiable in your view function as a data member of 
+            the $block object
+            
+                function my_view($block, $layout, $request, $response)
+                {
+                    $the_matches = $block->getParams();
+                }
+                
+            -->
+            <!-- <url_regex></url_regex> -->
+            <!-- ############################################# -->
+            
+            <!-- ############################################# -->
+            <!-- The <view> tag specifies the view function to be called when a URL match is 
+            found.  This view function is located in 
+            
+            app/code/codepool/Packagename_Modulename/views/simplepage.php
+            
+            Where Packagename_Modulename is the name of the module specified below (defaults to 
+            Pulsestorm_Simplepage) and codepool is the codepool (local or community) that this
+            modules is configured with in app/etc/modules/*.xml.
+            
+            See Pulsestorm_Simplepage/views/simplepage.php for information on this function
+            -->            
+            <!-- <view>hello</view> --> 
+            <!-- ############################################# -->
+            
+            <!-- ############################################# -->
+            <!-- <module> Contains the name of the installed module whose views/simplepage.php 
+            we should include to find our view function. If ommitted, will default 
+            to Pulsestorm_Simplepage -->
+            <!-- <module></module> -->
+            <!-- ############################################# -->
+            
+            <!-- ############################################# -->
+            <!-- <block_class> Contains the block alias of the block that's passed
+            to the view function.  Defaults to pulsestorm_simplepage/view, which is 
+            a simple extension of core/template.
+            -->
+            <!-- <block_class></block_class> -->
+            <!-- ############################################# -->
+        <!-- </another_example> -->
     </pulsestorm_simplepage_routes>
 </config>

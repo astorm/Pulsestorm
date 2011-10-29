@@ -2,6 +2,9 @@
 class Pulsestorm_Simplepage_Controller_Router extends Mage_Core_Controller_Varien_Router_Standard
 {
 
+    /**
+    * Event Observer, adds self as a router, allowing all this magic to take place
+    */
     public function initControllerRouters($observer)
     {
         /* @var $front Mage_Core_Controller_Varien_Front */
@@ -10,7 +13,16 @@ class Pulsestorm_Simplepage_Controller_Router extends Mage_Core_Controller_Varie
         $front->addRouter('pulsestorm_simplepage', $this);
     }
 
-    public function match(Zend_Controller_Request_Http $request)
+    /**
+    * Gets us to Pulsestorm_Simplepage::IndexController->indexAction()
+    *
+    * Original designs were going to route to a standard Magento controller
+    * until the django style pattern matching was decided.  The serves mainly
+    * to ensure that the module has been installed correctly, and the jigger
+    * the request object the same as default Magento routing would, while still
+    * bypassing that routing system.
+    */
+    protected function _matchStandardController($request)
     {
         $path = trim($request->getPathInfo(), '/');
         if(!$path)
@@ -50,6 +62,19 @@ class Pulsestorm_Simplepage_Controller_Router extends Mage_Core_Controller_Varie
             $request->setParam($parts[$i], isset($parts[$i+1]) ? urldecode($parts[$i+1]) : '');
         }
         
+        return array($controller_instance,$action);
+    }
+        
+    public function match(Zend_Controller_Request_Http $request)
+    {   
+        //old school routing to get to our index controller
+        list($controller_instance, $action)    = $this->_matchStandardController($request);
+        if(!$controller_instance)
+        {
+            return false;
+        }
+        
+        //actual routing logic that checks our URLs
         $view_name = Mage::getSingleton('pulsestorm_simplepage/handler')->init($request)
         ->getViewName();
 
@@ -59,12 +84,8 @@ class Pulsestorm_Simplepage_Controller_Router extends Mage_Core_Controller_Varie
             $controller_instance->dispatch($action);
             return true;
         }        
+        
         return false;
-//         var_dump($controller);
-//         var_dump($controller_name);
-//         var_dump($action);
-//         var_dump($controller_instance);
-//         throw new Exception("Trying to match");
     }
     
 }

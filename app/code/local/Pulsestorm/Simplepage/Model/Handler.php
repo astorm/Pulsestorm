@@ -1,4 +1,9 @@
 <?php
+/**
+* This is the class responisble for parsing through the URLs configured
+* in simplepage.xml and deciding if there's a match.  Its instantiated
+* as a singleton
+*/
 class Pulsestorm_Simplepage_Model_Handler extends Varien_Object
 {
     const DEFAULT_MODULE        = 'Pulsestorm_Simplepage';
@@ -37,5 +42,13 @@ class Pulsestorm_Simplepage_Model_Handler extends Varien_Object
             }                        
         }
         return $this;
+    }
+    
+    /**
+    * Generates a layout handle in case users will want to use layout xml
+    */    
+    public function getLayoutHandleName()
+    {
+        return strToLower('simplepage' . '_' . $this->getModule() . '_' . $this->getViewName());
     }
 }
