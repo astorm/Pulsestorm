@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<modules>
-		<Pulsestorm_Modulelist>
-			<active>false</active>
+		<Pulsestorm_Simplepage>
+			<active>true</active>
 			<codePool>community</codePool>
-		</Pulsestorm_Modulelist>
+		</Pulsestorm_Simplepage>
 	</modules>
 </config>

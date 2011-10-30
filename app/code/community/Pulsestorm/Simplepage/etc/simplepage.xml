@@ -1,6 +1,5 @@
 <config>
-    <pulsestorm_simplepage_routes>
-    
+    <pulsestorm_simplepage_routes>            
         <!-- this is the minimum configuration for a route -->
         <a_uniquely_identified_node_name_maybe_use_your_package_namespace>
             <url_regex><![CDATA[^test/(?P<foo>page)]]></url_regex>

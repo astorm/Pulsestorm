@@ -38,7 +38,6 @@ function hello($block, $layout, $request, $response)
     //the bock on returning it. Standard Magento theme
     //rules apply for template loading
     $block->setTemplate('pulsestorm_simplepage/example.phtml');  
-    
     //$layout->getBlock('left')->getParentBlock()->unsetChild('left');
     //$layout->getBlock('root')->setTemplate('page/1column.phtml');
     return $block;
