@@ -1,0 +1,55 @@
+<?php
+	$class = $this->getClass();
+?>
+<table border=0 cellpadding=4 cellspacing=4>
+	<tr>
+		<td style="font-weight: bold;">
+			Class Name:
+		</td>
+		<td>
+			<?php echo $class['fileParts']['className']; ?>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-weight: bold;">
+			Parent(s):
+		</td>
+		<td>
+			<?php
+				if($class['parents']) {
+					echo implode(', ', $class['parents']);
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-weight: bold;">
+			Implemented In:
+		</td>
+		<td>
+			<?php echo $class['filePath']; ?>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-weight: bold;">
+			Factory Method:
+		</td>
+		<td>
+			<?php
+				$method = "Mage::helper('" . $class['groupName'];
+				if($class['alias'] != 'data') {
+					$method .= '/' . $class['alias'];
+				}
+				echo $method . "')";
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-weight: bold;">
+			Rewrite By:
+		</td>
+		<td>
+			<?php echo $class['rewrite']; ?>
+		</td>
+	</tr>
+</table>

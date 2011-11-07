@@ -1,0 +1,100 @@
+<?php
+$urlNamespace = Mage::getModel('adminhtml/url')->getUrl('*/helper/namespaces');
+$urlModule = Mage::getModel('adminhtml/url')->getUrl('*/helper/modules');
+$urlHelper = Mage::getModel('adminhtml/url')->getUrl('*/helper/helpers');
+$urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
+
+$model = Mage::getModel('alanstormdotcom_developermanual/source_helper');
+$codePoolOptions = $model->getCodePools();
+?>
+<h1>Helper Methods Reference</h1>
+<div id="selects">
+	<span style="float: left; margin-right: 8px;">
+		<div style="font-weight: bold;">CodePool</div>
+		<div>
+			<select id="codepool_select">
+				<?php echo $codePoolOptions; ?>
+			</select>
+		</div>
+	</span>
+	<span id="namespace_span" style="display: none; float: left; margin-right: 8px;">
+		<div style="font-weight: bold;">NameSpace</div>
+		<div>
+			<select id="namespace_select">
+				
+			</select>
+		</div>
+	</span>
+	<span id="module_span" style="display: none; float: left; margin-right: 8px;">
+		<div style="font-weight: bold;">Module</div>
+		<div>
+			<select id="module_select"></select>
+		</div>
+	</span>
+	<span id="helper_span" style="display: none; float: left; margin-right: 8px;">
+		<div style="font-weight: bold;">Helper</div>
+		<div>
+			<select id="helper_select"></select>
+		</div>
+	</span>
+</div>
+<div style="clear: both;"></div>
+<hr style="margin-top: 12px; margin-bottom: 6px;"/>
+<div id="result">
+	
+</div>
+<script type="text/javascript">
+	document.observe("dom:loaded", function() {
+		$('codepool_select').observe('change',function(e){			
+			if($('codepool_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlNamespace; ?>',{
+					method:'get',
+					parameters:{codepool : $('codepool_select').value},
+					onSuccess:function(r){
+						$('namespace_select').innerHTML = r.responseText;
+						$('namespace_span').style.display = '';
+					}
+				})
+			}
+		});
+		
+		$('namespace_select').observe('change',function(e){			
+			if($('namespace_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlModule; ?>',{
+					method:'get',
+					parameters:{namespace : $('namespace_select').value},
+					onSuccess:function(r){
+						$('module_select').innerHTML = r.responseText;
+						$('module_span').style.display = '';
+					}
+				})
+			}
+		});
+		
+		$('module_select').observe('change',function(e){			
+			if($('module_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlHelper; ?>',{
+					method:'get',
+					parameters:{module : $('module_select').value},
+					onSuccess:function(r){
+						$('helper_select').innerHTML = r.responseText;
+						$('helper_span').style.display = '';
+					}
+				})
+			}
+		});
+		
+		$('helper_select').observe('change',function(e){			
+			if($('helper_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlClassInfo; ?>',{
+					method:'get',
+					parameters:{class : $('helper_select').value},
+					onSuccess:function(r){
+						$('result').innerHTML = r.responseText;
+					}
+				})
+			}
+		});
+	});
+</script>
+
