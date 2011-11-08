@@ -18,7 +18,7 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 																							  $classInfo['fileParts']['className']));
 		
 		$classInfo['parents'] = $reflector->getParents();
-		$classInfo['methods'] = $reflector->getMethods();
+		$classInfo['methods'] = $reflector->getMethods($classInfo['parents']);
 		$classInfo['properties'] = $reflector->getProperties();
 		
 		return $classInfo;

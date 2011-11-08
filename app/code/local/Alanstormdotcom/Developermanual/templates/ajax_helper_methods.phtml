@@ -3,7 +3,7 @@
 ?>
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
-		<th style="font-size: 1.6em;">
+		<th colspan=2 style="font-size: 1.6em;">
 			Class
 		</th>
 	</tr>
@@ -72,10 +72,34 @@
 
 <hr style="margin-top: 12px; margin-bottom: 6px;"/>
 
+<!--
+$line['name']
+$line['modifiers']
+$line['parameters']
+$line['docComment']
+-->
+
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
 		<th style="font-size: 1.6em;">
 			Methods
 		</th>
 	</tr>
+	<?php foreach($class['methods'] as $declaringClass => $classMethods) : ?>
+		<?php if($declaringClass != $class['fileParts']['className']) : ?>
+		<tr>
+			<th>
+				Inherited from: <?php echo $declaringClass; ?>
+			</th>
+		</tr>
+		<?php endif; ?>
+		<?php foreach($classMethods as $method) : ?>
+		<tr>
+			<td>
+				<?php echo implode(' ', $method['modifiers']); ?>
+				<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	<?php endforeach; ?>
 </table>

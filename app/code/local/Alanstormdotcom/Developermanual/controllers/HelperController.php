@@ -44,11 +44,15 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 		
 		$classInfo = Mage::getModel('alanstormdotcom_developermanual/helper')->getClassinfo($class, $classAlias);
 		
+		//Zend_Debug::dump($classInfo['methods']);
+		
+		
 		$block = $this->getLayout()->createBlock('alanstormdotcom_developermanual/Renderer_Reflection_Helper')
 								   ->setTemplate('ajax_helper_methods.phtml')
 								   ->setClass($classInfo);
 								   
 		echo $block->toHtml();
+		
 		
 	}
 }

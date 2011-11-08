@@ -2,6 +2,7 @@
 class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_Model_Abstract
 {
 	protected $_reflector;
+	protected $_className;
 	
 	public function __construct(array $args)
 	{
@@ -10,10 +11,10 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		}
 		
 		$path = $args[0];
-		$class = $args[1];
+		$this->_className = $args[1];
 		
 		require_once($path);
-		$this->_reflector = new ReflectionClass($class);
+		$this->_reflector = new ReflectionClass($this->_className);
 	}
 	
 	public function getParents()
@@ -28,10 +29,13 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		return $parents;
 	}
 	
-	public function getMethods()
+	public function getMethods(array $parents)
 	{
-		$return = array();
-		
+		$return = array($this->_className => array());
+		foreach($parents as $parent) {
+			$return[$parent] = array();
+		}
+			
 		$methods = $this->_reflector->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC |
 												 ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_FINAL);
 		foreach($methods as $method) {
@@ -40,8 +44,9 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 			$line['modifiers'] = Reflection::getModifierNames($method->getModifiers());
 			$line['parameters'] = $this->_getParameters($method);
 			$line['docComment'] = $method->getDocComment();
-			$return[] = $line;
+			$return[$method->getDeclaringClass()->getName()][] = $line;
 		}
+		
 		
 		return $return;
 	}
@@ -67,7 +72,8 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		
 		foreach($method->getParameters() as $param) {
 			$line = array();
-			$line['name'] = $param->getName();
+			//$line['name'] = $param->getName();
+			$line['name'] = $param->__toString();
 			if($param->isOptional()) {
 				$line['default'] = $param->getDefaultValue();
 			}
