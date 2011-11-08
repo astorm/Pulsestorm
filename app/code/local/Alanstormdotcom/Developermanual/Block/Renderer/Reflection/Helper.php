@@ -7,10 +7,9 @@ class Alanstormdotcom_Developermanual_Block_Renderer_Reflection_Helper extends A
 		foreach($params as $param) {
 			$start = strpos($param['name'], '$');
 			$end = strpos($param['name'], ']');
+			
 			$part = substr($param['name'], $start, $end - $start - 1);
-			if(isset($param['default'])) {
-				
-			}
+			
 			$list[] = $part;
 		}
 		

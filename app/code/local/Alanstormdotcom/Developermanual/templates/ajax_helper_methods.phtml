@@ -103,3 +103,36 @@ $line['docComment']
 		<?php endforeach; ?>
 	<?php endforeach; ?>
 </table>
+
+<hr style="margin-top: 12px; margin-bottom: 6px;"/>
+
+<!--
+$line['name']
+$line['modifiers']
+$line['docComment']
+-->
+
+<table border=0 cellpadding=4 cellspacing=4>
+	<tr>
+		<th style="font-size: 1.6em;">
+			Properties
+		</th>
+	</tr>
+	<?php foreach($class['properties'] as $declaringClass => $classProperties) : ?>
+		<?php if($declaringClass != $class['fileParts']['className']) : ?>
+		<tr>
+			<th>
+				Inherited from: <?php echo $declaringClass; ?>
+			</th>
+		</tr>
+		<?php endif; ?>
+		<?php foreach($classProperties as $prop) : ?>
+		<tr>
+			<td>
+				<?php echo implode(' ', $prop['modifiers']); ?>
+				<?php echo $prop['name']; ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	<?php endforeach; ?>
+</table>

@@ -51,16 +51,19 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		return $return;
 	}
 	
-	public function getProperties()
+	public function getProperties(array $parents)
 	{
-		$return  = array();
+		$return = array($this->_className => array());
+		foreach($parents as $parent) {
+			$return[$parent] = array();
+		}
 		
 		foreach($this->_reflector->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED) as $prop) {
 			$line = array();
 			$line['name'] = $prop->getName();
 			$line['modifiers'] = Reflection::getModifierNames($prop->getModifiers());
 			$line['docComment'] = $prop->getDocComment();
-			$return[] = $line;
+			$return[$prop->getDeclaringClass()->getName()][] = $line;
 		}
 		
 		return $return;
