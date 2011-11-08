@@ -3,6 +3,11 @@
 ?>
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
+		<th style="font-size: 1.6em;">
+			Class
+		</th>
+	</tr>
+	<tr>
 		<td style="font-weight: bold;">
 			Class Name:
 		</td>
@@ -44,12 +49,33 @@
 			?>
 		</td>
 	</tr>
+	<?php if(is_array($class['rewrite']) && sizeof($class['rewrite']) > 0) : ?>
 	<tr>
+		<?php if(array_key_exists('by', $class['rewrite'])) : ?>
 		<td style="font-weight: bold;">
 			Rewrite By:
 		</td>
 		<td>
-			<?php echo $class['rewrite']; ?>
+			<?php echo $class['rewrite']['by']; ?>
 		</td>
+		<?php elseif(array_key_exists('for', $class['rewrite'])) : ?>
+		<td style="font-weight: bold;">
+			Rewrite For:
+		</td>
+		<td>
+			<?php echo $class['rewrite']['for']; ?>
+		</td>
+		<?php endif; ?>
+	</tr>
+	<?php endif; ?>
+</table>
+
+<hr style="margin-top: 12px; margin-bottom: 6px;"/>
+
+<table border=0 cellpadding=4 cellspacing=4>
+	<tr>
+		<th style="font-size: 1.6em;">
+			Methods
+		</th>
 	</tr>
 </table>

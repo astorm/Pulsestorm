@@ -49,5 +49,6 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 								   ->setClass($classInfo);
 								   
 		echo $block->toHtml();
+		
 	}
 }

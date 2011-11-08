@@ -12,7 +12,7 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 		$groupName = $this->_getGroupName($classInfo['fileParts']['classPath'], $classInfo['fileParts']['module']);
 		$classInfo['groupName'] = $groupName;
 		$classInfo['alias'] = $classAlias;
-		$classInfo['rewrite'] = $this->_getRewrite($groupName, $classAlias);
+		$classInfo['rewrite'] = $this->_getRewrite($groupName, $classAlias, $classInfo['fileParts']['className']);
 		
 		$reflector = Mage::getModel('alanstormdotcom_developermanual/reflector_helper', array($filePath,
 																							  $classInfo['fileParts']['className']));
@@ -60,14 +60,23 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 		}
 	}
 	
-	protected function _getRewrite($groupName, $classAlias)
+	protected function _getRewrite($groupName, $classAlias, $className)
 	{
 		$helpers = $this->_getConfigHelpers();
 		
 		if(isset($helpers->{$groupName}->rewrite->{$classAlias})) {
-			return (string) $helpers->{$groupName}->rewrite->{$classAlias};
+			if($className == (string) $helpers->{$groupName}->rewrite->{$classAlias}) {
+				if(isset($helpers->{$groupName}->class)) {
+					return array('for' => (string) $helpers->{$groupName}->class);
+				} else {
+					$return = array('for' => str_replace(' ', '_', ucwords('mage ' . $groupName . ' helper ' . $classAlias)));
+				}
+			} else {
+				$return = array('by' => (string) $helpers->{$groupName}->rewrite->{$classAlias});
+			}
+			return $return;
 		} else {
-			return null;
+			return array();
 		}
 	}
 	
