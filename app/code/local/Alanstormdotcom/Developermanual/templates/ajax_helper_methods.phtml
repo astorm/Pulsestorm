@@ -81,30 +81,67 @@ $line['docComment']
 
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
-		<th style="font-size: 1.6em;">
-			Methods
+		<th style="font-size: 1.6em;" colspan="2">
+			<a href="" onclick="$('methods_body').toggle();return false;">Methods</a>
 		</th>
 	</tr>
-	<?php foreach($class['methods'] as $declaringClass => $classMethods) : ?>
-		<?php if($declaringClass != $class['fileParts']['className']) : ?>
+	<tbody id="methods_body" style="display: '';">
 		<tr>
-			<th>
-				Inherited from: <?php echo $declaringClass; ?>
-			</th>
-		</tr>
-		<?php endif; ?>
-		<?php foreach($classMethods as $method) : ?>
-		<tr>
-			<td>
-				<?php echo implode(' ', $method['modifiers']); ?>
-				<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+			<td colspan="2">
+				<table border=0 cellpadding=4 cellspacing=4>
+					<?php foreach($class['methods']['own_methods'] as $classMethod) : ?>
+						<tr>
+							<td style="width: 4px;">
+								&nbsp;
+							</td>
+							<td>
+								<a href="" onclick="return false;">more...</a>
+							</td>
+							<td>
+								<?php echo implode(' ', $classMethod['modifiers']); ?>
+								<?php echo $classMethod['name'] . $this->parseParameters($classMethod['parameters']); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
 			</td>
 		</tr>
+		<?php foreach($class['methods']['inherited'] as $name => $parentClass) : ?>
+			<tr>
+				<td style="width: 4px;">
+					&nbsp;
+				</td>
+				<td>
+					<table border=0 cellpadding=4 cellspacing=4>
+						<tr>
+							<th colspan="3" style="font-size: 1.2em;">
+								Inherited from: <a href="" onclick="$('inherited_<?php echo $name; ?>').toggle();return false;">
+									<?php echo $name; ?>
+								</a>
+							</th>
+						</tr>
+						<tbody id="inherited_<?php echo $name; ?>" style="display: none;">
+						<?php foreach($parentClass as $method) : ?>
+							<tr>
+								<td style="width: 4px;">
+									&nbsp;
+								</td>
+								<td>
+									<a href="" onclick="return false;">more...</a>
+								</td>
+								<td>
+									<?php echo implode(' ', $method['modifiers']); ?>
+									<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+						</tbody>
+					</table>
+				</td>
+			</tr>
 		<?php endforeach; ?>
-	<?php endforeach; ?>
+	</tbody>
 </table>
-
-<hr style="margin-top: 12px; margin-bottom: 6px;"/>
 
 <!--
 $line['name']
@@ -115,9 +152,10 @@ $line['docComment']
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
 		<th style="font-size: 1.6em;">
-			Properties
+			<a href="" onclick="$('properties_body').toggle();return false;">Properties</a>
 		</th>
 	</tr>
+	<tbody id="properties_body" style="display: none;">
 	<?php foreach($class['properties'] as $declaringClass => $classProperties) : ?>
 		<?php if($declaringClass != $class['fileParts']['className']) : ?>
 		<tr>
@@ -135,4 +173,7 @@ $line['docComment']
 		</tr>
 		<?php endforeach; ?>
 	<?php endforeach; ?>
+	</tbody>
 </table>
+
+<hr style="margin-top: 12px; margin-bottom: 6px;"/>

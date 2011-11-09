@@ -31,9 +31,10 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 	
 	public function getMethods(array $parents)
 	{
-		$return = array($this->_className => array());
+		$return = array('own_methods' => array(),
+						'inherited' => array());
 		foreach($parents as $parent) {
-			$return[$parent] = array();
+			$return['inherited'][$parent] = array();
 		}
 			
 		$methods = $this->_reflector->getMethods(ReflectionMethod::IS_STATIC | ReflectionMethod::IS_PUBLIC |
@@ -44,9 +45,12 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 			$line['modifiers'] = Reflection::getModifierNames($method->getModifiers());
 			$line['parameters'] = $this->_getParameters($method);
 			$line['docComment'] = $method->getDocComment();
-			$return[$method->getDeclaringClass()->getName()][] = $line;
+			if($method->getDeclaringClass()->getName() == $this->_className) {
+				$return['own_methods'][] = $line;
+			} else{
+				$return['inherited'][$method->getDeclaringClass()->getName()][] = $line;
+			}
 		}
-		
 		
 		return $return;
 	}
