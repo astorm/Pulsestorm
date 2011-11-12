@@ -45,6 +45,8 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 			$line['modifiers'] = Reflection::getModifierNames($method->getModifiers());
 			$line['parameters'] = $this->_getParameters($method);
 			$line['docComment'] = $method->getDocComment();
+			$line['lineStart'] = $method->getStartLine();
+			$line['lineEnd'] = $method->getEndLine();
 			if($method->getDeclaringClass()->getName() == $this->_className) {
 				$return['own_methods'][] = $line;
 			} else{

@@ -95,6 +95,16 @@ $codePoolOptions = $model->getCodePools();
 				})
 			}
 		});
+		
+		moreIsLess = function(el, caller)
+		{
+			$(el).toggle();
+			
+			$(caller).innerHTML == 'more...' ? $(caller).innerHTML = 'less...' : $(caller).innerHTML = 'more...';
+			
+			return false;
+		};
 	});
+	
 </script>
 

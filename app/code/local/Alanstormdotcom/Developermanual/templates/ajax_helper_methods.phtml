@@ -94,14 +94,39 @@ $line['docComment']
 							<td style="width: 4px;">
 								&nbsp;
 							</td>
-							<td>
-								<a href="" onclick="return false;">more...</a>
+							<td colspan="2">
+								<a href="" onclick="return moreIsLess('more_own_<?php echo $classMethod['name']; ?>', this)">more...</a>
 							</td>
 							<td>
 								<?php echo implode(' ', $classMethod['modifiers']); ?>
 								<?php echo $classMethod['name'] . $this->parseParameters($classMethod['parameters']); ?>
 							</td>
 						</tr>
+						<tbody id="more_own_<?php echo $classMethod['name']; ?>" style="display: none;">
+							<tr>
+								<td style="width: 4px;">
+								</td>
+								<td>
+								</td>
+								<td style="width: 4px;">
+								</td>
+								<td>
+									Implemented in: <?php echo $class['filePath'] . ' on lines: ' .  $classMethod['lineStart'] .
+														' - ' . $classMethod['lineEnd']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 4px;">
+								</td>
+								<td>
+								</td>
+								<td style="width: 4px;">
+								</td>
+								<td>
+									<pre><?php echo $classMethod['docComment']; ?></pre>
+								</td>
+							</tr>
+						</tbody>
 					<?php endforeach; ?>
 				</table>
 			</td>
@@ -177,3 +202,13 @@ $line['docComment']
 </table>
 
 <hr style="margin-top: 12px; margin-bottom: 6px;"/>
+
+<script type="text/javascript">
+/**
+ *$('more_own_<?php //echo $classMethod['name']; ?>').toggle(); this.innerHTML = 'less...'; return false;
+ 
+	document.observe("dom:loaded", function() {
+		moreIsLess = function(){alert 'More is Less'; return false;};
+	});
+ */
+</script>
