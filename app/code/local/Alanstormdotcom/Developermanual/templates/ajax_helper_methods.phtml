@@ -146,20 +146,43 @@ $line['docComment']
 							</th>
 						</tr>
 						<tbody id="inherited_<?php echo $name; ?>" style="display: none;">
-						<?php foreach($parentClass as $method) : ?>
 							<tr>
 								<td style="width: 4px;">
 									&nbsp;
 								</td>
 								<td>
-									<a href="" onclick="return false;">more...</a>
-								</td>
-								<td>
-									<?php echo implode(' ', $method['modifiers']); ?>
-									<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+									<table border=0 cellpadding=4 cellspacing=4>
+										<?php foreach($parentClass as $method) : ?>
+											<tr>
+												<td>
+													<a href="" onclick="return moreIsLess('more_inherited_<?php echo $method['name']; ?>', this)">more...</a>
+												</td>
+												<td>
+													<?php echo implode(' ', $method['modifiers']); ?>
+													<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+												</td>
+											</tr>
+											<tbody id ="more_inherited_<?php echo $method['name']; ?>" style="display: none;">
+												<tr>
+													<td>
+													</td>
+													<td>
+														Implemented in: <?php echo $class['filePath'] . ' on lines: ' .  $method['lineStart'] .
+														' - ' . $method['lineEnd']; ?>
+													</td>
+												</tr>
+												<tr>
+													<td>
+													</td>
+													<td>
+														<pre><?php echo $method['docComment']; ?></pre>
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach; ?>
+									</table>
 								</td>
 							</tr>
-						<?php endforeach; ?>
 						</tbody>
 					</table>
 				</td>
