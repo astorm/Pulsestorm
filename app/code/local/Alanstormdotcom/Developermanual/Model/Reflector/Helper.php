@@ -90,6 +90,11 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		return $this->_reflector->getConstants();
 	}
 	
+	public function getDocComment()
+	{
+		return $this->_reflector->getDocComment();
+	}
+	
 	protected function _getParameters(Reflector $method)
 	{
 		$return = array();

@@ -68,6 +68,14 @@
 		<?php endif; ?>
 	</tr>
 	<?php endif; ?>
+	<tr>
+		<td style="font-weight: bold;">
+			<a href="" onclick="$('class_doc_comment').toggle();return false;">Doc Comment:</a>
+		</td>
+		<td>
+			<span id="class_doc_comment" style="display: none;"><pre><?php echo $class['docComment']; ?></pre></span>
+		</td>
+	</tr>
 </table>
 
 <hr style="margin-top: 12px; margin-bottom: 6px;"/>
