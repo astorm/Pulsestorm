@@ -42,6 +42,7 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		foreach($methods as $method) {
 			$line = array();
 			$line['name'] = $method->name;
+			$line['fileName'] = $method->getFileName();
 			$line['modifiers'] = Reflection::getModifierNames($method->getModifiers());
 			$line['parameters'] = $this->_getParameters($method);
 			$line['docComment'] = $method->getDocComment();
@@ -59,9 +60,10 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 	
 	public function getProperties(array $parents)
 	{
-		$return = array($this->_className => array());
+		$return = array('own_props' => array(),
+						'inherited' => array());
 		foreach($parents as $parent) {
-			$return[$parent] = array();
+			$return['inherited'][$parent] = array();
 		}
 		
 		foreach($this->_reflector->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED) as $prop) {
@@ -69,9 +71,17 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 			$line['name'] = $prop->getName();
 			$line['modifiers'] = Reflection::getModifierNames($prop->getModifiers());
 			$line['docComment'] = $prop->getDocComment();
-			$return[$prop->getDeclaringClass()->getName()][] = $line;
+			$line['default'] = $this->_getDefaultValue($prop);
+			if($prop->getDeclaringClass()->getName() == $this->_className) {
+				$line['fileName'] = $this->_reflector->getFileName();
+				$return['own_props'][] = $line;
+			} else{
+				$class = new ReflectionClass($prop->getDeclaringClass()->getName());
+				$line['fileName'] = $class->getFileName();
+				$return['inherited'][$prop->getDeclaringClass()->getName()][] = $line;
+			}
 		}
-		
+
 		return $return;
 	}
 	
@@ -86,10 +96,30 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 			if($param->isOptional()) {
 				$line['default'] = $param->getDefaultValue();
 			}
+			
 			$return[] = $line;
 		}
 		
 		
 		return $return;
+	}
+	
+	protected function _getDefaultValue(Reflector $prop)
+	{
+		if($prop->isProtected()) {
+			$prop->setAccessible(true);
+		}
+		
+		if($prop->isStatic()) {
+			return $prop->getValue();
+		}
+		
+		if(! $prop->getDeclaringClass()->isAbstract()) {
+			$className = $prop->getDeclaringClass()->getName();
+			$class = new $className();
+			return $prop->getValue($class);
+		}
+		
+		return null;
 	}
 }
