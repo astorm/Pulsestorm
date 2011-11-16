@@ -111,7 +111,7 @@ $line['docComment']
 								<td style="width: 4px;">
 								</td>
 								<td>
-									Implemented in: <?php echo $class['filePath'] . ' on lines: ' .  $classMethod['lineStart'] .
+									Implemented in: <?php echo $classMethod['fileName'] . ' on lines: ' .  $classMethod['lineStart'] .
 														' - ' . $classMethod['lineEnd']; ?>
 								</td>
 							</tr>
@@ -167,7 +167,7 @@ $line['docComment']
 													<td>
 													</td>
 													<td>
-														Implemented in: <?php echo $class['filePath'] . ' on lines: ' .  $method['lineStart'] .
+														Implemented in: <?php echo $method['fileName'] . ' on lines: ' .  $method['lineStart'] .
 														' - ' . $method['lineEnd']; ?>
 													</td>
 												</tr>
@@ -191,47 +191,135 @@ $line['docComment']
 	</tbody>
 </table>
 
-<!--
-$line['name']
-$line['modifiers']
-$line['docComment']
--->
-
 <table border=0 cellpadding=4 cellspacing=4>
 	<tr>
-		<th style="font-size: 1.6em;">
-			<a href="" onclick="$('properties_body').toggle();return false;">Properties</a>
+		<th style="font-size: 1.6em;" colspan="2">
+			<a href="" onclick="$('constants_body').toggle();return false;">Constants</a>
 		</th>
 	</tr>
-	<tbody id="properties_body" style="display: none;">
-	<?php foreach($class['properties'] as $declaringClass => $classProperties) : ?>
-		<?php if($declaringClass != $class['fileParts']['className']) : ?>
+	<tbody id="constants_body" style="display: '';">
+		<?php foreach($class['constants'] as $constant => $value) : ?>
 		<tr>
-			<th>
-				Inherited from: <?php echo $declaringClass; ?>
-			</th>
-		</tr>
-		<?php endif; ?>
-		<?php foreach($classProperties as $prop) : ?>
-		<tr>
+			<td style="width: 4px;">
+				&nbsp;
+			</td>
 			<td>
-				<?php echo implode(' ', $prop['modifiers']); ?>
-				<?php echo $prop['name']; ?>
+				<?php echo $constant . ' = ' . $value; ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
-	<?php endforeach; ?>
+	</tbody>
+</table>
+
+<table border=0 cellpadding=4 cellspacing=4>
+	<tr>
+		<th style="font-size: 1.6em;" colspan="2">
+			<a href="" onclick="$('props_body').toggle();return false;">Properties</a>
+		</th>
+	</tr>
+	<tbody id="props_body" style="display: '';">
+		<tr>
+			<td colspan="2">
+				<table border=0 cellpadding=4 cellspacing=4>
+					<?php foreach($class['properties']['own_props'] as $classProp) : ?>
+						<tr>
+							<td style="width: 4px;">
+								&nbsp;
+							</td>
+							<td colspan="2">
+								<a href="" onclick="return moreIsLess('more_own_prop<?php echo $classProp['name']; ?>', this)">more...</a>
+							</td>
+							<td>
+								<?php echo implode(' ', $classProp['modifiers']); ?>
+								<?php echo $classProp['name']; ?>
+								<?php if($classProp['default']) echo ' = ' . $classProp['default']; ?>
+							</td>
+						</tr>
+						<tbody id="more_own_prop<?php echo $classProp['name']; ?>" style="display: none;">
+							<tr>
+								<td style="width: 4px;">
+								</td>
+								<td>
+								</td>
+								<td style="width: 4px;">
+								</td>
+								<td>
+									Implemented in: <?php echo $classProp['fileName']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 4px;">
+								</td>
+								<td>
+								</td>
+								<td style="width: 4px;">
+								</td>
+								<td>
+									<pre><?php echo $classProp['docComment']; ?></pre>
+								</td>
+							</tr>
+						</tbody>
+					<?php endforeach; ?>
+				</table>
+			</td>
+		</tr>
+		<?php foreach($class['properties']['inherited'] as $name => $parentClass) : ?>
+			<tr>
+				<td style="width: 4px;">
+					&nbsp;
+				</td>
+				<td>
+					<table border=0 cellpadding=4 cellspacing=4>
+						<tr>
+							<th colspan="3" style="font-size: 1.2em;">
+								Inherited from: <a href="" onclick="$('inherited_prop<?php echo $name; ?>').toggle();return false;">
+									<?php echo $name; ?>
+								</a>
+							</th>
+						</tr>
+						<tbody id="inherited_prop<?php echo $name; ?>" style="display: none;">
+							<tr>
+								<td style="width: 4px;">
+									&nbsp;
+								</td>
+								<td>
+									<table border=0 cellpadding=4 cellspacing=4>
+										<?php foreach($parentClass as $prop) : ?>
+											<tr>
+												<td>
+													<a href="" onclick="return moreIsLess('more_inherited_props<?php echo $prop['name']; ?>', this)">more...</a>
+												</td>
+												<td>
+													<?php echo implode(' ', $prop['modifiers']); ?>
+													<?php echo $prop['name']; ?>
+												</td>
+											</tr>
+											<tbody id ="more_inherited_props<?php echo $prop['name']; ?>" style="display: none;">
+												<tr>
+													<td>
+													</td>
+													<td>
+														Implemented in: <?php echo $prop['fileName']; ?>
+													</td>
+												</tr>
+												<tr>
+													<td>
+													</td>
+													<td>
+														<pre><?php echo $prop['docComment']; ?></pre>
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach; ?>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		<?php endforeach; ?>
 	</tbody>
 </table>
 
 <hr style="margin-top: 12px; margin-bottom: 6px;"/>
-
-<script type="text/javascript">
-/**
- *$('more_own_<?php //echo $classMethod['name']; ?>').toggle(); this.innerHTML = 'less...'; return false;
- 
-	document.observe("dom:loaded", function() {
-		moreIsLess = function(){alert 'More is Less'; return false;};
-	});
- */
-</script>
