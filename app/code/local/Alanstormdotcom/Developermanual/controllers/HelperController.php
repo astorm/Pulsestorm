@@ -4,7 +4,7 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
     public function helperReferenceAction()
     {
 		$this->loadLayout();			
-		//$this->_initCssBlock();
+		$this->_initCssJsBlock();
 		$block = $this->getLayout()->createBlock('alanstormdotcom_developermanual/template')
 								   ->setTemplate('form_helper_action.phtml');
 		$this->_addContent($block);
@@ -54,5 +54,11 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 		echo $block->toHtml();
 		
 		
+	}
+	
+	protected function _initCssJsBlock()
+	{
+		$js = $this->getLayout()->createBlock('alanstormdotcom_developermanual/template')->setTemplate('helpers_js.phtml');			
+		$this->_addJs($js);	
 	}
 }

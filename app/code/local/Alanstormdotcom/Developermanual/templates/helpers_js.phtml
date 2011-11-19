@@ -1,0 +1,70 @@
+<?php
+$urlNamespace = Mage::getModel('adminhtml/url')->getUrl('*/helper/namespaces');
+$urlModule = Mage::getModel('adminhtml/url')->getUrl('*/helper/modules');
+$urlHelper = Mage::getModel('adminhtml/url')->getUrl('*/helper/helpers');
+$urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
+?>
+<script type="text/javascript">
+	document.observe("dom:loaded", function() {
+		$('codepool_select').observe('change',function(e){			
+			if($('codepool_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlNamespace; ?>',{
+					method:'get',
+					parameters:{codepool : $('codepool_select').value},
+					onSuccess:function(r){
+						$('namespace_select').innerHTML = r.responseText;
+						$('namespace_span').show();
+                        $('module_span').hide();
+                        $('helper_span').hide();
+					}
+				})
+			}
+		});
+		
+		$('namespace_select').observe('change',function(e){			
+			if($('namespace_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlModule; ?>',{
+					method:'get',
+					parameters:{namespace : $('namespace_select').value},
+					onSuccess:function(r){
+						$('module_select').innerHTML = r.responseText;
+						$('module_span').show();
+                        $('helper_span').hide();
+					}
+				})
+			}
+		});
+		
+		$('module_select').observe('change',function(e){			
+			if($('module_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlHelper; ?>',{
+					method:'get',
+					parameters:{module : $('module_select').value},
+					onSuccess:function(r){
+						$('helper_select').innerHTML = r.responseText;
+						$('helper_span').style.display = '';
+					}
+				})
+			}
+		});
+		
+		$('helper_select').observe('change',function(e){			
+			if($('helper_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlClassInfo; ?>',{
+					method:'get',
+					parameters:{class : $('helper_select').value},
+					onSuccess:function(r){
+						$('result').innerHTML = r.responseText;
+					}
+				})
+			}
+		});
+		
+		moreIsLess = function(el, caller)
+		{
+			$(el).toggle();
+			$(caller).innerHTML == 'more...' ? $(caller).innerHTML = 'less...' : $(caller).innerHTML = 'more...';
+			return false;
+		};
+	});
+</script>
