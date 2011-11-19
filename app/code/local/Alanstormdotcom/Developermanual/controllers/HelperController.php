@@ -43,10 +43,7 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 		$classAlias = $parts[1];
 		
 		$classInfo = Mage::getModel('alanstormdotcom_developermanual/helper')->getClassinfo($class, $classAlias);
-		
-		//Zend_Debug::dump($classInfo['methods']);
-		
-		
+
 		$block = $this->getLayout()->createBlock('alanstormdotcom_developermanual/Renderer_Reflection_Helper')
 								   ->setTemplate('ajax_helper_methods.phtml')
 								   ->setClass($classInfo);
@@ -59,6 +56,9 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 	protected function _initCssJsBlock()
 	{
 		$js = $this->getLayout()->createBlock('alanstormdotcom_developermanual/template')->setTemplate('helpers_js.phtml');			
-		$this->_addJs($js);	
+		$this->_addJs($js);
+		
+		$css = $this->getLayout()->createBlock('alanstormdotcom_developermanual/template')->setTemplate('helpers_css.phtml');			
+		$this->_addJs($css);	
 	}
 }

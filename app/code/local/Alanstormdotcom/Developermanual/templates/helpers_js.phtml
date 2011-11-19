@@ -48,7 +48,7 @@ $urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
 			}
 		});
 		
-		$('helper_select').observe('change',function(e){			
+		$('helper_select').observe('change', function(e){			
 			if($('helper_select').value) {
 				var r = new Ajax.Request('<?php  echo $urlClassInfo; ?>',{
 					method:'get',
@@ -59,6 +59,12 @@ $urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
 				})
 			}
 		});
+        
+        showIsHide = function(el)
+        {
+            $(el).toggle();
+            return false;
+        };
 		
 		moreIsLess = function(el, caller)
 		{

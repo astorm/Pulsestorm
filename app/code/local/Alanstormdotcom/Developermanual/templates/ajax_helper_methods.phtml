@@ -1,14 +1,14 @@
 <?php
 	$class = $this->getClass();
 ?>
-<table border=0 cellpadding=4 cellspacing=4>
+<table>
 	<tr>
-		<th colspan=2 style="font-size: 1.6em;">
+		<th class="label" colspan=2>
 			Class
 		</th>
 	</tr>
 	<tr>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Class Name:
 		</td>
 		<td>
@@ -16,7 +16,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Parent(s):
 		</td>
 		<td>
@@ -28,7 +28,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Implemented In:
 		</td>
 		<td>
@@ -36,7 +36,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Factory Method:
 		</td>
 		<td>
@@ -52,14 +52,14 @@
 	<?php if(is_array($class['rewrite']) && sizeof($class['rewrite']) > 0) : ?>
 	<tr>
 		<?php if(array_key_exists('by', $class['rewrite'])) : ?>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Rewrite By:
 		</td>
 		<td>
 			<?php echo $class['rewrite']['by']; ?>
 		</td>
 		<?php elseif(array_key_exists('for', $class['rewrite'])) : ?>
-		<td style="font-weight: bold;">
+		<td class="label">
 			Rewrite For:
 		</td>
 		<td>
@@ -69,8 +69,8 @@
 	</tr>
 	<?php endif; ?>
 	<tr>
-		<td style="font-weight: bold;">
-			<a href="" onclick="$('class_doc_comment').toggle();return false;">Doc Comment:</a>
+		<td class="label">
+			<a class="more" href="" onclick="return showIsHide('class_doc_comment');">Doc Comment:</a>
 		</td>
 		<td>
 			<span id="class_doc_comment" style="display: none;"><pre><?php echo $class['docComment']; ?></pre></span>
@@ -78,32 +78,25 @@
 	</tr>
 </table>
 
-<hr style="margin-top: 12px; margin-bottom: 6px;"/>
+<hr />
 
-<!--
-$line['name']
-$line['modifiers']
-$line['parameters']
-$line['docComment']
--->
-
-<table border=0 cellpadding=4 cellspacing=4>
+<table>
 	<tr>
-		<th style="font-size: 1.6em;" colspan="2">
-			<a href="" onclick="$('methods_body').toggle();return false;">Methods</a>
+		<th class="label" colspan="2">
+			<a href="" class="more" onclick="return showIsHide('methods_body');">Methods</a>
 		</th>
 	</tr>
 	<tbody id="methods_body" style="display: '';">
 		<tr>
 			<td colspan="2">
-				<table border=0 cellpadding=4 cellspacing=4>
+				<table>
 					<?php foreach($class['methods']['own_methods'] as $classMethod) : ?>
 						<tr>
-							<td style="width: 4px;">
+							<td class="tab">
 								&nbsp;
 							</td>
 							<td colspan="2">
-								<a href="" onclick="return moreIsLess('more_own_<?php echo $classMethod['name']; ?>', this)">more...</a>
+								<a href="" class="more" onclick="return moreIsLess('more_own_<?php echo $classMethod['name']; ?>', this)">more...</a>
 							</td>
 							<td>
 								<?php echo implode(' ', $classMethod['modifiers']); ?>
@@ -112,11 +105,11 @@ $line['docComment']
 						</tr>
 						<tbody id="more_own_<?php echo $classMethod['name']; ?>" style="display: none;">
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 								</td>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 									Implemented in: <?php echo $classMethod['fileName'] . ' on lines: ' .  $classMethod['lineStart'] .
@@ -124,11 +117,11 @@ $line['docComment']
 								</td>
 							</tr>
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 								</td>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 									<pre><?php echo $classMethod['docComment']; ?></pre>
@@ -145,25 +138,25 @@ $line['docComment']
 					&nbsp;
 				</td>
 				<td>
-					<table border=0 cellpadding=4 cellspacing=4>
+					<table>
 						<tr>
-							<th colspan="3" style="font-size: 1.2em;">
-								Inherited from: <a href="" onclick="$('inherited_<?php echo $name; ?>').toggle();return false;">
+							<th colspan="3" class="label-small">
+								Inherited from: <a href="" class="more" onclick="return showIsHide('inherited_<?php echo $name; ?>');">
 									<?php echo $name; ?>
 								</a>
 							</th>
 						</tr>
 						<tbody id="inherited_<?php echo $name; ?>" style="display: none;">
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 									&nbsp;
 								</td>
 								<td>
-									<table border=0 cellpadding=4 cellspacing=4>
+									<table>
 										<?php foreach($parentClass as $method) : ?>
 											<tr>
 												<td>
-													<a href="" onclick="return moreIsLess('more_inherited_<?php echo $method['name']; ?>', this)">more...</a>
+													<a href="" class="more" onclick="return moreIsLess('more_inherited_<?php echo $method['name']; ?>', this)">more...</a>
 												</td>
 												<td>
 													<?php echo implode(' ', $method['modifiers']); ?>
@@ -199,16 +192,16 @@ $line['docComment']
 	</tbody>
 </table>
 
-<table border=0 cellpadding=4 cellspacing=4>
+<table>
 	<tr>
-		<th style="font-size: 1.6em;" colspan="2">
-			<a href="" onclick="$('constants_body').toggle();return false;">Constants</a>
+		<th class="label" colspan="2">
+			<a href="" class="more" onclick="return showIsHide('constants_body');">Constants</a>
 		</th>
 	</tr>
 	<tbody id="constants_body" style="display: '';">
 		<?php foreach($class['constants'] as $constant => $value) : ?>
 		<tr>
-			<td style="width: 4px;">
+			<td class="tab">
 				&nbsp;
 			</td>
 			<td>
@@ -219,23 +212,23 @@ $line['docComment']
 	</tbody>
 </table>
 
-<table border=0 cellpadding=4 cellspacing=4>
+<table>
 	<tr>
-		<th style="font-size: 1.6em;" colspan="2">
-			<a href="" onclick="$('props_body').toggle();return false;">Properties</a>
+		<th class="label" colspan="2">
+			<a class="more" href="" onclick="return showIsHide('props_body');">Properties</a>
 		</th>
 	</tr>
 	<tbody id="props_body" style="display: '';">
 		<tr>
 			<td colspan="2">
-				<table border=0 cellpadding=4 cellspacing=4>
+				<table>
 					<?php foreach($class['properties']['own_props'] as $classProp) : ?>
 						<tr>
-							<td style="width: 4px;">
+							<td class="tab">
 								&nbsp;
 							</td>
 							<td colspan="2">
-								<a href="" onclick="return moreIsLess('more_own_prop<?php echo $classProp['name']; ?>', this)">more...</a>
+								<a href="" class="more" onclick="return moreIsLess('more_own_prop<?php echo $classProp['name']; ?>', this)">more...</a>
 							</td>
 							<td>
 								<?php echo implode(' ', $classProp['modifiers']); ?>
@@ -245,22 +238,22 @@ $line['docComment']
 						</tr>
 						<tbody id="more_own_prop<?php echo $classProp['name']; ?>" style="display: none;">
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 								</td>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 									Implemented in: <?php echo $classProp['fileName']; ?>
 								</td>
 							</tr>
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 								</td>
-								<td style="width: 4px;">
+								<td class="tab">
 								</td>
 								<td>
 									<pre><?php echo $classProp['docComment']; ?></pre>
@@ -273,29 +266,29 @@ $line['docComment']
 		</tr>
 		<?php foreach($class['properties']['inherited'] as $name => $parentClass) : ?>
 			<tr>
-				<td style="width: 4px;">
+				<td class="tab">
 					&nbsp;
 				</td>
 				<td>
-					<table border=0 cellpadding=4 cellspacing=4>
+					<table>
 						<tr>
-							<th colspan="3" style="font-size: 1.2em;">
-								Inherited from: <a href="" onclick="$('inherited_prop<?php echo $name; ?>').toggle();return false;">
+							<th colspan="3" class="label-small">
+								Inherited from: <a href="" class="more" onclick="return showIsHide('inherited_prop<?php echo $name; ?>');">
 									<?php echo $name; ?>
 								</a>
 							</th>
 						</tr>
 						<tbody id="inherited_prop<?php echo $name; ?>" style="display: none;">
 							<tr>
-								<td style="width: 4px;">
+								<td class="tab">
 									&nbsp;
 								</td>
 								<td>
-									<table border=0 cellpadding=4 cellspacing=4>
+									<table>
 										<?php foreach($parentClass as $prop) : ?>
 											<tr>
 												<td>
-													<a href="" onclick="return moreIsLess('more_inherited_props<?php echo $prop['name']; ?>', this)">more...</a>
+													<a href="" class="more" onclick="return moreIsLess('more_inherited_props<?php echo $prop['name']; ?>', this)">more...</a>
 												</td>
 												<td>
 													<?php echo implode(' ', $prop['modifiers']); ?>
@@ -330,4 +323,4 @@ $line['docComment']
 	</tbody>
 </table>
 
-<hr style="margin-top: 12px; margin-bottom: 6px;"/>
+<hr />
