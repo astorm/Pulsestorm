@@ -101,7 +101,6 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 		
 		foreach($method->getParameters() as $param) {
 			$line = array();
-			//$line['name'] = $param->getName();
 			$line['name'] = $param->__toString();
 			if($param->isOptional()) {
 				$line['default'] = $param->getDefaultValue();
