@@ -27,10 +27,22 @@ $codePoolOptions = $model->getCodePools();
 		</div>
 	</span>
 	<span id="helper_span" class="select" style="display: none;">
-		<div class="label">Helper</div>
-		<div>
-			<select id="helper_select"></select>
-		</div>
+		<span class="select">
+			<div class="label">Helper</div>
+			<div>
+				<select id="helper_select"></select>
+			</div>
+		</span>
+		<span class="select">
+			<div class="label">Sort</div>
+			<div>
+				<select id="sort_select">
+					<option value="">Don't sort</option>
+					<option value="asc">Sort ascending</option>
+					<option value="desc">Sort descending</option>
+				</select>
+			</div>
+		</span>
 	</span>
 </div>
 <div class="clear"></div>

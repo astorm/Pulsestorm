@@ -42,7 +42,9 @@ class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Co
 		$class = $parts[0];
 		$classAlias = $parts[1];
 		
-		$classInfo = Mage::getModel('alanstormdotcom_developermanual/helper')->getClassinfo($class, $classAlias);
+		$sort = $this->getRequest()->getParam('sort');
+		
+		$classInfo = Mage::getModel('alanstormdotcom_developermanual/helper')->getClassinfo($class, $classAlias, $sort);
 
 		$block = $this->getLayout()->createBlock('alanstormdotcom_developermanual/Renderer_Reflection_Helper')
 								   ->setTemplate('ajax_helper_methods.phtml')

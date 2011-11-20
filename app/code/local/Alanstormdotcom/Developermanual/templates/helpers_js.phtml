@@ -52,7 +52,21 @@ $urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
 			if($('helper_select').value) {
 				var r = new Ajax.Request('<?php  echo $urlClassInfo; ?>',{
 					method:'get',
-					parameters:{class : $('helper_select').value},
+					parameters:{class : $('helper_select').value,
+                                sort : $('sort_select').value},
+					onSuccess:function(r){
+						$('result').innerHTML = r.responseText;
+					}
+				})
+			}
+		});
+        
+        $('sort_select').observe('change', function(e){			
+			if($('helper_select').value) {
+				var r = new Ajax.Request('<?php  echo $urlClassInfo; ?>',{
+					method:'get',
+					parameters:{class : $('helper_select').value,
+                                sort : $('sort_select').value},
 					onSuccess:function(r){
 						$('result').innerHTML = r.responseText;
 					}

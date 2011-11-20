@@ -3,7 +3,7 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 {
 	protected $_configHelpers;
 	
-	public function getClassinfo($filePath, $classAlias)
+	public function getClassinfo($filePath, $classAlias, $sort)
 	{
 		$classInfo = array();
 		
@@ -22,6 +22,12 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 		$classInfo['methods'] = $reflector->getMethods($classInfo['parents']);
 		$classInfo['properties'] = $reflector->getProperties($classInfo['parents']);
 		$classInfo['constants'] = $reflector->getConstants();
+		
+		//Zend_Debug::dump($classInfo['methods']['own_methods']);
+		if($sort && strlen($sort) > 0) {
+			$this->_sortAll($classInfo, $sort);
+		}
+		//Zend_Debug::dump($classInfo['methods']['own_methods']);
 		
 		return $classInfo;
 	}
@@ -89,5 +95,39 @@ class Alanstormdotcom_Developermanual_Model_Helper extends Mage_Core_Model_Abstr
 		}
 		
 		return $this->_configHelpers;
+	}
+	
+	protected function _sortAll(&$classInfo, $sort)
+	{
+		$args = array(get_class($this), 'sortArrayAsc');
+		if($sort == 'desc') {
+			$args = array(get_class($this), 'sortArrayDesc');
+		}
+		
+		usort($classInfo['methods']['own_methods'], $args);
+		foreach($classInfo['methods']['inherited'] as &$methods) {
+			usort($methods, $args);
+		}
+		
+		usort($classInfo['properties']['own_props'], $args);
+		foreach($classInfo['properties']['inherited'] as &$props) {
+			usort($props, $args);
+		}
+		
+		if($sort == 'desc') {
+			krsort($classInfo['constants']);
+		} else {
+			ksort($classInfo['constants']);
+		}
+	}
+	
+	public static function sortArrayAsc($first, $second)
+	{
+		return strcmp($first['name'], $second['name']);
+	}
+	
+	public static function sortArrayDesc($first, $second)
+	{
+		return -1 * strcmp($first['name'], $second['name']);
 	}
 }
