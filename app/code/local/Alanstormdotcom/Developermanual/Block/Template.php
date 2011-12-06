@@ -13,6 +13,31 @@
 */
 	class Alanstormdotcom_Developermanual_Block_Template extends Mage_Core_Block_Template
 	{
+		protected function _checkValidScriptPath($scriptPath)
+		{
+			$paths_to_check = array(Mage::getBaseDir('design'),Mage::getModuleDir('', 'Alanstormdotcom_Developermanual'));
+			$valid			= false;
+			foreach($paths_to_check as $path)
+			{
+				if(strpos($scriptPath, realpath($path)) === 0)
+				{
+					$valid = true;
+				}
+			}
+			return $valid;		
+		}
+
+		public function setScriptPath($dir)
+		{
+			$scriptPath = realpath($dir);
+			if ($this->_checkValidScriptPath($scriptPath)) {
+				$this->_viewDir = $dir;
+			} else {
+				Mage::log('Not valid script path:' . $dir, Zend_Log::CRIT, null, null, true);
+			}
+			return $this;
+		}
+		
 		public function fetchView($fileName)
 		{
 			//ignores file name, just uses a simple include with template name
