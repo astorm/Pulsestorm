@@ -1,3 +1,7 @@
+<?php
+    $info = new stdClass();
+    $info->baseSkinUrl = Mage::getBaseUrl('skin');
+?>
 <script type="text/javascript">	
 	var Alanstormdotcom_Systemsearch = Class.create({
 		pointToItem:function(area,label)
@@ -38,13 +42,14 @@
 		},		
 		getArrow:function(direction)
 		{
+		    var info = <?php echo Mage::helper('core')->jsonEncode($info);?>;
 			direction = direction ? direction : 'left';
 			Alanstormdotcom_Systemsearch.arrowCount++;
 			var arrow_id = 'alanstormdotcom_alanstormdotcomsystemsearch_arrow'+'_'+Alanstormdotcom_Systemsearch.arrowCount;
 			if(!$(arrow_id))
 			{
 				var arrow = new Element('img');			
-				arrow.writeAttribute({'id':arrow_id,'src':'/skin/adminhtml/default/default/images/alanstormdotcom/'+direction+'.gif'});
+				arrow.writeAttribute({'id':arrow_id,'src':info.baseSkinUrl + 'adminhtml/default/default/images/alanstormdotcom/'+direction+'.gif'});
 				arrow.setStyle({'display':'none'});
 				arrow.makePositioned();
 				arrow.addClassName('alanstormdotcom_alanstormdotcomsystemsearch_arrows');
