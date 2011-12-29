@@ -1,0 +1,54 @@
+<?php
+$model = Mage::getModel('alanstormdotcom_developermanual/source_helper');
+$codePoolOptions = $model->getCodePools();
+?>
+<h1>Helper Methods Reference</h1>
+<div id="selects">
+	<span class="select">
+		<div class="label">CodePool</div>
+		<div>
+			<select id="codepool_select">
+				<?php echo $codePoolOptions; ?>
+			</select>
+		</div>
+	</span>
+	<span id="namespace_span" class="select" style="display: none;">
+		<div class="label">NameSpace</div>
+		<div>
+			<select id="namespace_select">
+				
+			</select>
+		</div>
+	</span>
+	<span id="module_span" class="select" style="display: none;">
+		<div class="label">Module</div>
+		<div>
+			<select id="module_select"></select>
+		</div>
+	</span>
+	<span id="helper_span" class="select" style="display: none;">
+		<span class="select">
+			<div class="label">Helper</div>
+			<div>
+				<select id="helper_select"></select>
+			</div>
+		</span>
+		<span class="select">
+			<div class="label">Sort</div>
+			<div>
+				<select id="sort_select">
+					<option value="">Don't sort</option>
+					<option value="asc">Sort ascending</option>
+					<option value="desc">Sort descending</option>
+				</select>
+			</div>
+		</span>
+	</span>
+</div>
+<div class="clear"></div>
+<hr />
+<div id="result">
+	
+</div>
+
+

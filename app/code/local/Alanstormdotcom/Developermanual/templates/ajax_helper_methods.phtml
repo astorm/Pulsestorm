@@ -1,0 +1,326 @@
+<?php
+	$class = $this->getClass();
+?>
+<table>
+	<tr>
+		<th class="label" colspan=2>
+			Class
+		</th>
+	</tr>
+	<tr>
+		<td class="label">
+			Class Name:
+		</td>
+		<td>
+			<?php echo $class['fileParts']['className']; ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Parent(s):
+		</td>
+		<td>
+			<?php
+				if($class['parents']) {
+					echo implode(', ', $class['parents']);
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Implemented In:
+		</td>
+		<td>
+			<?php echo $class['filePath']; ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Factory Method:
+		</td>
+		<td>
+			<?php
+				$method = "Mage::helper('" . $class['groupName'];
+				if($class['alias'] != 'data') {
+					$method .= '/' . $class['alias'];
+				}
+				echo $method . "')";
+			?>
+		</td>
+	</tr>
+	<?php if(is_array($class['rewrite']) && sizeof($class['rewrite']) > 0) : ?>
+	<tr>
+		<?php if(array_key_exists('by', $class['rewrite'])) : ?>
+		<td class="label">
+			Rewrite By:
+		</td>
+		<td>
+			<?php echo $class['rewrite']['by']; ?>
+		</td>
+		<?php elseif(array_key_exists('for', $class['rewrite'])) : ?>
+		<td class="label">
+			Rewrite For:
+		</td>
+		<td>
+			<?php echo $class['rewrite']['for']; ?>
+		</td>
+		<?php endif; ?>
+	</tr>
+	<?php endif; ?>
+	<tr>
+		<td class="label">
+			<a class="more" href="" onclick="return showIsHide('class_doc_comment');">Doc Comment:</a>
+		</td>
+		<td>
+			<span id="class_doc_comment" style="display: none;"><pre><?php echo $class['docComment']; ?></pre></span>
+		</td>
+	</tr>
+</table>
+
+<hr />
+
+<table>
+	<tr>
+		<th class="label" colspan="2">
+			<a href="" class="more" onclick="return showIsHide('methods_body');">Methods</a>
+		</th>
+	</tr>
+	<tbody id="methods_body" style="display: '';">
+		<tr>
+			<td colspan="2">
+				<table>
+					<?php foreach($class['methods']['own_methods'] as $classMethod) : ?>
+						<tr>
+							<td class="tab">
+								&nbsp;
+							</td>
+							<td colspan="2">
+								<a href="" class="more" onclick="return moreIsLess('more_own_<?php echo $classMethod['name']; ?>', this)">more...</a>
+							</td>
+							<td>
+								<?php echo implode(' ', $classMethod['modifiers']); ?>
+								<?php echo $classMethod['name'] . $this->parseParameters($classMethod['parameters']); ?>
+							</td>
+						</tr>
+						<tbody id="more_own_<?php echo $classMethod['name']; ?>" style="display: none;">
+							<tr>
+								<td class="tab">
+								</td>
+								<td>
+								</td>
+								<td class="tab">
+								</td>
+								<td>
+									Implemented in: <?php echo $classMethod['fileName'] . ' on lines: ' .  $classMethod['lineStart'] .
+														' - ' . $classMethod['lineEnd']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td class="tab">
+								</td>
+								<td>
+								</td>
+								<td class="tab">
+								</td>
+								<td>
+									<pre><?php echo $classMethod['docComment']; ?></pre>
+								</td>
+							</tr>
+						</tbody>
+					<?php endforeach; ?>
+				</table>
+			</td>
+		</tr>
+		<?php foreach($class['methods']['inherited'] as $name => $parentClass) : ?>
+			<tr>
+				<td style="width: 4px;">
+					&nbsp;
+				</td>
+				<td>
+					<table>
+						<tr>
+							<th colspan="3" class="label-small">
+								Inherited from: <a href="" class="more" onclick="return showIsHide('inherited_<?php echo $name; ?>');">
+									<?php echo $name; ?>
+								</a>
+							</th>
+						</tr>
+						<tbody id="inherited_<?php echo $name; ?>" style="display: none;">
+							<tr>
+								<td class="tab">
+									&nbsp;
+								</td>
+								<td>
+									<table>
+										<?php foreach($parentClass as $method) : ?>
+											<tr>
+												<td>
+													<a href="" class="more" onclick="return moreIsLess('more_inherited_<?php echo $method['name']; ?>', this)">more...</a>
+												</td>
+												<td>
+													<?php echo implode(' ', $method['modifiers']); ?>
+													<?php echo $method['name'] . $this->parseParameters($method['parameters']); ?>
+												</td>
+											</tr>
+											<tbody id ="more_inherited_<?php echo $method['name']; ?>" style="display: none;">
+												<tr>
+													<td>
+													</td>
+													<td>
+														Implemented in: <?php echo $method['fileName'] . ' on lines: ' .  $method['lineStart'] .
+														' - ' . $method['lineEnd']; ?>
+													</td>
+												</tr>
+												<tr>
+													<td>
+													</td>
+													<td>
+														<pre><?php echo $method['docComment']; ?></pre>
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach; ?>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<table>
+	<tr>
+		<th class="label" colspan="2">
+			<a href="" class="more" onclick="return showIsHide('constants_body');">Constants</a>
+		</th>
+	</tr>
+	<tbody id="constants_body" style="display: '';">
+		<?php foreach($class['constants'] as $constant => $value) : ?>
+		<tr>
+			<td class="tab">
+				&nbsp;
+			</td>
+			<td>
+				<?php echo $constant . ' = ' . $value; ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<table>
+	<tr>
+		<th class="label" colspan="2">
+			<a class="more" href="" onclick="return showIsHide('props_body');">Properties</a>
+		</th>
+	</tr>
+	<tbody id="props_body" style="display: '';">
+		<tr>
+			<td colspan="2">
+				<table>
+					<?php foreach($class['properties']['own_props'] as $classProp) : ?>
+						<tr>
+							<td class="tab">
+								&nbsp;
+							</td>
+							<td colspan="2">
+								<a href="" class="more" onclick="return moreIsLess('more_own_prop<?php echo $classProp['name']; ?>', this)">more...</a>
+							</td>
+							<td>
+								<?php echo implode(' ', $classProp['modifiers']); ?>
+								<?php echo $classProp['name']; ?>
+								<?php if($classProp['default']) echo ' = ' . $classProp['default']; ?>
+							</td>
+						</tr>
+						<tbody id="more_own_prop<?php echo $classProp['name']; ?>" style="display: none;">
+							<tr>
+								<td class="tab">
+								</td>
+								<td>
+								</td>
+								<td class="tab">
+								</td>
+								<td>
+									Implemented in: <?php echo $classProp['fileName']; ?>
+								</td>
+							</tr>
+							<tr>
+								<td class="tab">
+								</td>
+								<td>
+								</td>
+								<td class="tab">
+								</td>
+								<td>
+									<pre><?php echo $classProp['docComment']; ?></pre>
+								</td>
+							</tr>
+						</tbody>
+					<?php endforeach; ?>
+				</table>
+			</td>
+		</tr>
+		<?php foreach($class['properties']['inherited'] as $name => $parentClass) : ?>
+			<tr>
+				<td class="tab">
+					&nbsp;
+				</td>
+				<td>
+					<table>
+						<tr>
+							<th colspan="3" class="label-small">
+								Inherited from: <a href="" class="more" onclick="return showIsHide('inherited_prop<?php echo $name; ?>');">
+									<?php echo $name; ?>
+								</a>
+							</th>
+						</tr>
+						<tbody id="inherited_prop<?php echo $name; ?>" style="display: none;">
+							<tr>
+								<td class="tab">
+									&nbsp;
+								</td>
+								<td>
+									<table>
+										<?php foreach($parentClass as $prop) : ?>
+											<tr>
+												<td>
+													<a href="" class="more" onclick="return moreIsLess('more_inherited_props<?php echo $prop['name']; ?>', this)">more...</a>
+												</td>
+												<td>
+													<?php echo implode(' ', $prop['modifiers']); ?>
+													<?php echo $prop['name']; ?>
+												</td>
+											</tr>
+											<tbody id ="more_inherited_props<?php echo $prop['name']; ?>" style="display: none;">
+												<tr>
+													<td>
+													</td>
+													<td>
+														Implemented in: <?php echo $prop['fileName']; ?>
+													</td>
+												</tr>
+												<tr>
+													<td>
+													</td>
+													<td>
+														<pre><?php echo $prop['docComment']; ?></pre>
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach; ?>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<hr />

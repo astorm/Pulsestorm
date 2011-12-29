@@ -59,6 +59,11 @@
                         <title>Block Actions</title> 
                         <action>developermanual/index/blockLayoutactionsReference</action>
                     </block_actions>
+		    
+					<helper_actions module="alanstormdotcom_developermanual">
+                        <title>Helper Actions</title> 
+                        <action>developermanual/helper/helperReference</action>
+                    </helper_actions>
 
                     <about module="alanstormdotcom_developermanual">
                         <title>Resources</title> 
