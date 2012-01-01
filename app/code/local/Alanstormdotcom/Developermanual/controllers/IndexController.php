@@ -1,4 +1,5 @@
 <?php
+throw new Exception("Controller Moved to admin namespace, please update your references.");
 /**
 * Open Source Initiative OSI - The MIT License (MIT):Licensing
 * 

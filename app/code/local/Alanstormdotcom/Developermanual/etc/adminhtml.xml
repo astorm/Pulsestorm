@@ -6,22 +6,29 @@
             <children>
                 <block_actions module="alanstormdotcom_developermanual">
                     <title>Block Actions</title> 
-                    <action>developermanual/index/blockLayoutactionsReference</action>
+                    <!-- <action>adminhtml/alanstormdotcom_developermanual/blockLayoutactionsReference</action> -->
+                    <action>adminhtml/alanstormdotcom_developermanual_index/blockLayoutactionsReference</action>
+                    <!-- <action>developermanual/index/blockLayoutactionsReference</action> -->
                 </block_actions>
         
                 <helper_actions module="alanstormdotcom_developermanual">
                     <title>Helper Methods</title> 
-                    <action>developermanual/helper/helperReference</action>
+                    <action>adminhtml/alanstormdotcom_developermanual_helper/helperReference</action>
+                    <!-- <action>adminhtml/alanstormdotcom_developermanual/helperReference</action> -->
+                    <!-- <action>developermanual/helper/helperReference</action> -->
                 </helper_actions>
 
+<!-- 
                 <magento_api module="alanstormdotcom_developermanual">
                     <title>Magento API</title> 
-                    <action>developermanual/api/apiReference</action>
+                    <action>adminhtml/alanstormdotcom_developermanual/apiReference</action>
                 </magento_api>                   
+ -->
                 
                 <about module="alanstormdotcom_developermanual">
                     <title>About</title> 
-                    <action>developermanual/index/about</action>
+                    <action>adminhtml/alanstormdotcom_developermanual_index/about</action>
+                    <!-- <action>developermanual/index/about</action> -->
                 </about>                    
             </children>
         </developermanual>

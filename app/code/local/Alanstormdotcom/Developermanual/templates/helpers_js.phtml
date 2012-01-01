@@ -1,8 +1,8 @@
 <?php
-$urlNamespace = Mage::getModel('adminhtml/url')->getUrl('*/helper/namespaces');
-$urlModule = Mage::getModel('adminhtml/url')->getUrl('*/helper/modules');
-$urlHelper = Mage::getModel('adminhtml/url')->getUrl('*/helper/helpers');
-$urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/helper/classinfo');
+$urlNamespace = Mage::getModel('adminhtml/url')->getUrl('*/*/namespaces');
+$urlModule = Mage::getModel('adminhtml/url')->getUrl('*/*/modules');
+$urlHelper = Mage::getModel('adminhtml/url')->getUrl('*/*/helpers');
+$urlClassInfo = Mage::getModel('adminhtml/url')->getUrl('*/*/classinfo');
 ?>
 <script type="text/javascript">
 	document.observe("dom:loaded", function() {

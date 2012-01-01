@@ -1,6 +1,5 @@
 <?php
-throw new Exception("Controller Moved to admin namespace, please update your references.");
-class Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Controller_Action
+class Alanstormdotcom_Developermanual_Alanstormdotcom_Developermanual_HelperController extends Mage_Adminhtml_Controller_Action
 {
     public function helperReferenceAction()
     {

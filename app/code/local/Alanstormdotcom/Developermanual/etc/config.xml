@@ -8,6 +8,13 @@
 	
 	<admin>
 		<routers>
+		    <adminhtml>
+		        <args>
+		            <modules>
+    		            <alanstormdotcom_developermanual before="Mage_Adminhtml">Alanstormdotcom_Developermanual</alanstormdotcom_developermanual>
+		            </modules>
+		        </args>
+		    </adminhtml>
 			<alanstormdotcom_developermanual>
 				<use>admin</use>
 				<args>
