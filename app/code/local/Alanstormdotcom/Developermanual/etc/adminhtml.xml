@@ -18,12 +18,10 @@
                     <!-- <action>developermanual/helper/helperReference</action> -->
                 </helper_actions>
 
-<!-- 
                 <magento_api module="alanstormdotcom_developermanual">
                     <title>Magento API</title> 
-                    <action>adminhtml/alanstormdotcom_developermanual/apiReference</action>
+                    <action>adminhtml/alanstormdotcom_developermanual_api/reference</action>
                 </magento_api>                   
- -->
                 
                 <about module="alanstormdotcom_developermanual">
                     <title>About</title> 
