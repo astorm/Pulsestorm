@@ -1,0 +1,40 @@
+<?php $resource = $this->getResource(); ?>
+<?php $model = Mage::getModel($resource->model); ?>
+<?php foreach($resource->methods->children() as $method): ?>
+    <h3>Method: <?php echo $method->getName();?></h3>
+    <?php $php_method = $method->method ? $method->method : $method->getName(); ?>
+    <?php $reflection = new ReflectionMethod($model,$php_method); ?>
+    <p>
+    <code>$client->call($sessionId<?php
+        echo ", " . "'" . $resource->getName() . '.' . $method->getName() . "'";
+        foreach($reflection->getParameters() as $param)
+        {
+            echo ', $' . $param->getName(); 
+        }
+    ?>);</code>
+    </p>
+    
+    <h4>Implemented In</h4>
+    <p>
+        <code>
+            <?php echo get_class($model),'::',$php_method,"<br />"; ?>
+            <?php echo $reflection->getFilename(); ?>
+        </code>
+    </p>
+    <h4>Doc Comment</h4>        
+    <pre><?php echo preg_replace('{    \*}','*',$reflection->getDocComment()); ?></pre>
+    
+    <?php if($this->getShowMethod()): ?>
+        <h4>Method Implementation Definition</h4>
+        <pre><?php 
+            $lines = file($reflection->getFilename());
+            $lines = array_slice($lines, 
+            $reflection->getStartLine()-1, 
+            $reflection->getEndLine() - $reflection->getStartLine() + 1
+            );
+            echo htmlspecialchars(implode("",$lines)); 
+            ?>            
+        </pre>
+    <?php endif; ?>
+    
+<?php endforeach; ?>

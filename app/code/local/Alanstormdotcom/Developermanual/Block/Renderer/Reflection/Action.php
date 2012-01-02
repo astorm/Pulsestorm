@@ -87,9 +87,14 @@
 			return $this->_getNoDocumentation($method);
 		}
 		
+		static public function normalizeDocComment($string)
+		{
+		    return preg_split('%\*%', trim(str_replace('*/','',str_replace('/**','',$string))),-1,PREG_SPLIT_NO_EMPTY);
+		}
 		protected function _getYesDocumentation($method)
 		{
-			$lines = preg_split('%\*%', trim(str_replace('*/','',str_replace('/**','',$method->getDocComment()))),-1,PREG_SPLIT_NO_EMPTY);
+			#$lines = preg_split('%\*%', trim(str_replace('*/','',str_replace('/**','',$method->getDocComment()))),-1,PREG_SPLIT_NO_EMPTY);
+			$lines = self::normalizeDocComment($method->getDocComment());
 			
 			$output = array();			
 			$hit_at = false;

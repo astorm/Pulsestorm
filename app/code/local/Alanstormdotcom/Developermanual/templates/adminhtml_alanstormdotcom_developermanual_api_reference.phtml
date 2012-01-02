@@ -1,0 +1,41 @@
+<?php
+    $api = Mage::getSingleton('alanstormdotcom_developermanual/apiref');
+    $data = new stdClass();
+    $data->url = $this->getUrl('adminhtml/alanstormdotcom_developermanual_api/singleResource');
+?>
+<h1>Magento API</h1>
+
+<p>
+    <a href="<?php echo $this->getUrl('adminhtml/alanstormdotcom_developermanual_api/referenceAll');?>">View All</a>
+|
+
+<a href="<?php echo $this->getUrl('adminhtml/alanstormdotcom_developermanual_api/referenceAll',array('method'=>'1'));?>">View All With Implementation</a>
+</p>
+
+<h2>View Specific Resource</h2>
+
+<form>
+    <select id="api_resource">
+        <option value="">-- select api resource --</option>
+        <?php foreach($api->getResourceNodes() as $resource): ?>
+        <option value="<?php echo $resource->getName();?>"><?php echo $resource->getName();?></option>
+        <?php endforeach; ?>    
+    </select>
+</form>
+<div id="api_resource_results" style="margin-top:10px;">
+</div>
+
+<script type="text/javascript">
+	document.observe("dom:loaded", function() {
+	    var data = <?php echo json_encode($data); ?>;
+		$('api_resource').observe('change',function(e){			
+            var r = new Ajax.Request(data.url,{
+                method:'get',
+                parameters:{resource : $('api_resource').value},
+                onSuccess:function(r){
+                    $('api_resource_results').update(r.responseText);
+                }
+            })
+		});
+	});
+</script>

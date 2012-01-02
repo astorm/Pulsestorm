@@ -1,0 +1,15 @@
+<h1>Magento Core API</h1>
+<?php
+$config = Mage::getConfig()->loadModulesConfiguration('api.xml');
+$api = $config->getNode('api');
+$request = Mage::app()->getRequest();
+?>
+<?php foreach($api->resources->children() as $resource): ?>
+	<h2>Resource: <?php echo $resource->getName();?></h2>    
+    <?php
+        echo $this->getLayout()->createBlock('alanstormdotcom_developermanual/apiresource')
+        ->setResource($resource)
+        ->setShowMethod($request->getParam('method'))
+        ->toHtml();
+    ?>
+<?php endforeach; ?>
