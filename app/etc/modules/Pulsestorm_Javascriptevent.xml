@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Javascriptevent>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Pulsestorm_Javascriptevent>
+	</modules>
+</config>

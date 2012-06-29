@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Javascriptevent>
+			<version>0.1.0</version>
+		</Pulsestorm_Javascriptevent>
+	</modules>
+	<global>
+		<blocks>
+			<pulsestorm_javascriptevent>
+				<class>Pulsestorm_Javascriptevent_Block</class>
+			</pulsestorm_javascriptevent>
+		</blocks>
+		<models>
+			<pulsestorm_javascriptevent>
+				<class>Pulsestorm_Javascriptevent_Model</class>
+			</pulsestorm_javascriptevent>
+		</models>
+		<helpers>
+			<pulsestorm_javascriptevent>
+				<class>Pulsestorm_Javascriptevent_Helper</class>
+			</pulsestorm_javascriptevent>
+		</helpers>		
+	</global>
+	
+	<adminhtml>
+        <events> 
+            <controller_action_layout_generate_blocks_after>
+                <observers>
+                    <pulsestorm_javascriptevent_addjs>
+                        <type>singleton</type>
+                        <class>pulsestorm_javascriptevent/observer</class>
+                        <method>addJavascriptBlock</method>
+                    </pulsestorm_javascriptevent_addjs>
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+        </events>    	
+	</adminhtml>
+</config>
