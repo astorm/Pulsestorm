@@ -41,7 +41,7 @@
         public function fetchView($fileName)
         {
             //ignores file name, just uses a simple include with template name
-            $this->setScriptPath(dirname(__FILE__) . '/../phtml');
+            $this->setScriptPath(Mage::getConfig()->getModuleDir('','Alanstormdotcom_Systemsearch') . '/phtml');
             return parent::fetchView($this->getTemplate());
         }
 	
