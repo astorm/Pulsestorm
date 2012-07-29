@@ -167,6 +167,8 @@ function get_migration_script_for_attribute($code)
     //get text for script
     $array = var_export($new_data, true);
     
+    //generate script using simple string concatenation, making
+    //a single tear fall down the cheek of a CS professor
     $script = "<?php
 if(! (\$this instanceof Mage_Catalog_Model_Resource_Setup) )
 {
