@@ -57,11 +57,11 @@
 		<events>
 			<http_response_send_before>
 				<observers>
-					<unique_name>
+					<alanstormdotcom_systemsearch_add>
 						<type>singleton</type>
 						<class>alanstormdotcomsystemsearch/observer</class>
 						<method>addSystemsearchInit</method>
-					</unique_name>
+					</alanstormdotcom_systemsearch_add>
 				</observers>
 			</http_response_send_before>
 		</events>
