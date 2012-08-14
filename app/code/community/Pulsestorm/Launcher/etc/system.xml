@@ -1,0 +1,44 @@
+<config>
+	<sections>
+		<pulsestorm_launcher translate="label" module="pulsestorm_launcher">
+            <label>Pulsestorm Launcher</label>
+            <tab>advanced</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1010</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>	
+            <groups>
+				<options>
+                    <label>Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>				
+                    <fields>
+						<shortcut_code_first>
+                            <label>Keyboard Shortcut First</label>
+                            <comment>The keycode of the first keyboard shortcut (defulats to "ctrl"/"17")</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                    		
+						</shortcut_code_first>				
+						
+						<shortcut_code_second>
+                            <label>Keyboard Shortcut Second</label>
+                            <comment>The keycode of the first keyboard shortcut (defulats to "m"/"77")</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                    		
+						</shortcut_code_second>										
+					</fields>
+				</options>				
+			</groups>
+		</pulsestorm_launcher>
+	</sections>
+</config>

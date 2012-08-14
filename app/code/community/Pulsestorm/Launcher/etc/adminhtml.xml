@@ -1,0 +1,23 @@
+<config>			
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <pulsestorm_launcher>
+                                            <title>Pulsestorm Launcher</title>
+                                        </pulsestorm_launcher>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+</config>

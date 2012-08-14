@@ -1,0 +1,45 @@
+/*#pulsestorm_launcher .buttons-set { margin-top:10px; }*/
+#pulsestorm_launcher
+{
+    font-size:24px;
+}
+#pulsestorm_launcher .magento_content { height:auto !important; overflow:hidden; }
+#pulsestorm_launcher .magento_message { padding:0; }
+
+#pulsestorm_launcher .magento_buttons{ display:none;}
+
+#pulsestorm_launcher_input
+{
+    font-size:14px;
+    width:560px;
+    padding:0;
+    border:0;
+    margin:5px 0 5px 10px;
+    text-indent:8px;
+}
+
+#pulsestorm_launcher_results p
+{
+    font-size:14px;
+    line-height:16px;
+    margin:0;
+    padding:8px 15px 8px 15px;
+    backgorund:url(images/nav2_link_bg.gif) repeat-x 0 100%;
+    
+}
+
+#pulsestorm_launcher_results p a
+{
+    text-decoration:none;
+    color:#000;
+}
+
+#pulsestorm_launcher_results p.highlight
+{
+    background-color:#ddf;
+}
+
+/*
+#pulsestorm_launcher .textarea { width:930px !important; }
+#pulsestorm_launcher .magento_buttons { padding-left:7px; padding-right:7px; }
+*/

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Launcher>
+			<version>0.1.0</version>
+		</Pulsestorm_Launcher>
+	</modules>
+	<frontend>
+		<routers>
+			<pulsestorm_launcher>
+				<use>standard</use>
+				<args>
+					<module>Pulsestorm_Launcher</module>
+					<frontName>pulsestorm_launcher</frontName>
+				</args>
+			</pulsestorm_launcher>
+		</routers>
+	</frontend>
+	<global>
+		<blocks>
+			<pulsestorm_launcher>
+				<class>Pulsestorm_Launcher_Block</class>
+			</pulsestorm_launcher>
+		</blocks>
+		<models>
+			<pulsestorm_launcher>
+				<class>Pulsestorm_Launcher_Model</class>
+			</pulsestorm_launcher>
+		</models>
+		<helpers>
+			<pulsestorm_launcher>
+				<class>Pulsestorm_Launcher_Helper</class>
+			</pulsestorm_launcher>
+		</helpers>
+ 
+        <events>
+            <controller_action_layout_generate_blocks_after>
+                <observers>
+                    <pulsestorm_launchermore_blocks>
+                        <type>singleton</type>
+                        <class>pulsestorm_launcher/observer</class>
+                        <method>addNav</method>
+                    </pulsestorm_launchermore_blocks>
+                    
+                    <pulsestorm_launcher_add_config_nav>
+                        <type>singleton</type>
+                        <class>pulsestorm_launcher/observer</class>
+                        <method>addConfigNav</method>                    
+                    </pulsestorm_launcher_add_config_nav>
+
+                    <pulsestorm_launcher_hooks>
+                        <type>singleton</type>
+                        <class>pulsestorm_launcher/observer</class>
+                        <method>addHookJavascript</method>                    
+                    </pulsestorm_launcher_hooks>
+                    
+                    
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+        </events>		
+	</global>
+	
+	<default>
+	    <pulsestorm_launcher>
+	        <options>
+	            <shortcut_code_first>17</shortcut_code_first>
+	            <shortcut_code_second>77</shortcut_code_second>
+	        </options>
+	    </pulsestorm_launcher>
+	</default>
+</config>

@@ -1,0 +1,256 @@
+<?php
+/*
+Copyright (c) 2012 Pulse Storm LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+?>
+<script type="text/javascript">
+    var pulsestorm_launcher_menu            = <?php echo $this->getJson(); ?>;    
+    
+    //global function ponter into the dom:loaded closure
+    var pulsestorm_launcher_show_launcher;  
+    var pulsestorm_launcher_register_link;
+    document.observe('dom:loaded', function(){
+        var menu_links      = {};
+        var menu_parents    = [];
+        var key_queue = [null,null];
+        
+        var get_selected_highlight_index = function()
+        {
+            var elements = $$('#pulsestorm_launcher_results p');
+            var found = false;
+            for(var i=0;i<elements.length;i++)
+            {
+                if(elements[i].hasClassName('highlight'))
+                {
+                    found = true;
+                    break;
+                }
+            }        
+            return found ? i : -1
+        }
+        
+        var down = function()
+        {
+            var elements = $$('#pulsestorm_launcher_results p');
+            var i = get_selected_highlight_index();
+            if(i+1 != elements.length)
+            {
+                if(elements[i])
+                {
+                    elements[i].removeClassName('highlight');
+                }
+                elements[i+1].addClassName('highlight');
+            }
+        }
+        
+        var go_to_highlighted_link = function()
+        {
+            var a    = $$('#pulsestorm_launcher_results p.highlight a');
+            if(!a || !a[0])
+            {
+                //console.log("No anchor found");
+                return;
+            }
+            document.location = a[0].href;
+        }
+        
+        var up = function()
+        {
+            var elements = $$('#pulsestorm_launcher_results p');        
+            var i = get_selected_highlight_index();
+            if(i > 0)
+            {
+                elements[i].removeClassName('highlight');
+                elements[i-1].addClassName('highlight');        
+            }
+        } 
+        
+        var opendialog_launcher = function(content)    
+        {
+            Dialog.confirm(content, {
+                draggable:true,
+                resizable:true,
+                closable:true,
+                className:"magento",
+                windowClassName:"popup-window",
+                title:'Pulse Storm Launcher',
+                width:570,
+                height:555,
+                zIndex:1000,
+                recenterAuto:false,
+                hideEffect:Element.hide,
+                showEffect:Element.show,
+                id:"pulsestorm_launcher",
+                buttonClass:"form-button",
+                okLabel:"Submit",
+                ok: function(){},
+                cancel: function(){},
+                onClose: function(){},
+                firedElementId: 'short_description'
+            });    
+        }        
+        var open_window = function()
+        {
+            test = new Window({'id':'pulsestorm_launcher'});
+            test.setZIndex(1000);
+            test.setHTMLContent('<p>hello nurse</p>');        
+            test.setDestroyOnClose(true);
+            return test;
+        }
+        
+        var register_link = function(label, url)
+        {
+            var pre = '';
+            if(menu_parents.length > 0)
+            {
+                pre = menu_parents.join(' - ');
+                pre += ' - ';
+            }
+            menu_links[(pre+label).toLowerCase()] = {
+            'url':url,
+            'label':label,
+            'label-full':pre+label};
+        }
+        pulsestorm_launcher_register_link = register_link;
+        
+        var render_menu = function(o,a,depth)
+        {     
+            Object.keys(o).each(function(item){
+                var menu = o[item];            
+                if(menu.url && menu.url != '#')
+                {                
+                    register_link(menu.label, menu.url);
+                }
+                
+                a.push(Array(depth).join('-') + item);
+                
+                if(menu.children)
+                {                
+                    menu_parents.push(menu.label);
+                    render_menu(menu.children,a,depth+1);
+                    menu_parents.pop();
+                }            
+            });
+            return a;
+        }   
+        
+        var pulsestorm_launcher_search_menu = function(string)
+        {
+            if(!string)
+            {
+                return menu_links;
+            }
+            string = string.toLowerCase();
+            return Object.keys(menu_links).grep(string).collect(function(v){
+                return menu_links[v];
+            });            
+        }
+        
+        //
+        a = render_menu(pulsestorm_launcher_menu, [], 1);
+        // $('pulsestorm_launcher_test').update(a.join("\n"));   
+        
+        var show_launcher = function()
+        {                
+            
+            var content = "<div><input type=\"search\" id=\"pulsestorm_launcher_input\"/></div>";
+            content += "<div id=\"pulsestorm_launcher_results\"></div> ";
+            opendialog_launcher(content);
+            
+            setTimeout(function(){
+                //jiggering default magento styles
+                $$('td.magento_e')[0].setStyle({'display':'none'});
+                $$('td.magento_w')[0].setStyle({'display':'none'});
+                $('pulsestorm_launcher_content').setAttribute('style','');
+    
+                // console.log("Called the Timeout");
+                $('pulsestorm_launcher_input').focus();
+                var thing = function()
+                {
+                    alert("test");
+                }
+                //test = new Autocompleter.Local('pulsestorm_launcher_input','pulsestorm_launcher_results',['foo','baz','bar'],{'updateElement':thing});
+                $('pulsestorm_launcher_input').observe('keyup', function(e){
+                    if(e.which == 40 || e.which == 38)
+                    {
+                        // console.log("Bailing");
+                        return;
+                    }     
+                    
+                    if(e.which == 13)
+                    {
+                        go_to_highlighted_link();
+                        return;
+                    }
+                    // console.log("Called the Keup Setup in the timeout");
+                    var results = pulsestorm_launcher_search_menu($F('pulsestorm_launcher_input'));
+                    if(!$(results).collect)
+                    {
+                        $('pulsestorm_launcher_results').update('');
+                        return;
+                    }
+    
+                    var html = $(results).collect(function(e){
+                        var url = e['url'];
+                        return "<p><a href=\""+url+"\">" + e['label-full'] + "</a></p>";
+                    });
+                    $('pulsestorm_launcher_results').update(html.join(''));
+                });
+            }, 10);
+            
+            return;
+                
+        }
+        pulsestorm_launcher_show_launcher = show_launcher; //setup pointer
+        document.observe('keydown', function(e){        
+            if(e.which == 40 || e.which == 38)
+            {
+                return;
+            }
+            // console.log("Called");
+            key_queue.push(e.which);
+            key_queue.shift();
+
+            combined_codes = '<?php echo $this->getCombinedCodes(); ?>';
+            if(key_queue.join('_') == combined_codes)
+            {
+                Event.stop(e);
+                show_launcher()
+            }
+            // console.log(key_queue);
+        });
+        
+        document.observe('keydown', function(e){
+            if(!$('pulsestorm_launcher'))
+            {
+                return;
+            }
+            if(e.which == 40)
+            {
+                Event.stop(e);
+                down();
+            }
+            
+            if(e.which == 38)
+            {   
+                Event.stop(e);
+                up();
+            }
+        });        
+        $$('.nav-bar')[0].innerHTML += ' <span style="color:#fff">|</span> <a href="#" onclick ="pulsestorm_launcher_show_launcher();return false;" style="color:#fff;">Launcher</a>';
+    });    
+    
+</script>
+
+<!-- 
+<div style="margin-left:10px;">
+<pre id="pulsestorm_launcher_test">
+</pre>
+</div>
+ -->
