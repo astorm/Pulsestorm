@@ -43,7 +43,10 @@ class Pulsestorm_Launcher_Model_Observer
             foreach($tab->getSections() as $section)
             {
                 $label = 'System Configuration - ' . $section->getLabel();
-                $launcher_links->addLink($label,$section->getUrl());
+                $code = $section->getId();
+                $url   = $url = Mage::getModel('adminhtml/url');
+                $url   = $url->getUrl('adminhtml/system_config/edit', array('_current'=>true, 'section'=>$code));
+                $launcher_links->addLink($label,$url);
             }
         }    
     }
