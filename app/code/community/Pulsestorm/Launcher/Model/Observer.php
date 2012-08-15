@@ -38,9 +38,16 @@ class Pulsestorm_Launcher_Model_Observer
     
         $launcher_links = Mage::getSingleton('pulsestorm_launcher/links');
         $block = $controller->getLayout()->createBlock('adminhtml/system_config_tabs')->initTabs();
-        foreach($block->getTabs() as $tab)
+        
+        $tabs = $block->getTabs();
+        foreach($tabs as $tab)
         {
-            foreach($tab->getSections() as $section)
+            $sections = $tab->getSections();
+            if(!is_array($sections) && !($sections instanceof Varien_Data_Collection))
+            {
+                continue;
+            }
+            foreach($sections as $section)
             {
                 $label = 'System Configuration - ' . $section->getLabel();
                 $code = $section->getId();
