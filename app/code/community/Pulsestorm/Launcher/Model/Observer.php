@@ -96,7 +96,7 @@ class Pulsestorm_Launcher_Model_Observer
         $block              = $layout->createBlock('adminhtml/template')
         ->setTemplate('pulsestorm_launcher/js-nav.phtml')
         ->setJson($json)
-        ->setCombinedCodes('17_77');
+        ->setCombinedCodes($code);
         $before_body_end->append($block);    
     }
     
