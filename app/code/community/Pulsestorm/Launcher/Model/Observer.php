@@ -111,9 +111,12 @@ class Pulsestorm_Launcher_Model_Observer
     {
         $layout             = $controller->getLayout();
         
+        $designPackage = Mage::getDesign();        
+        
         $head               = $layout->getBlock('head');
         $head->addCss('pulsestorm_launcher/main.css')
         ->addItem('js_css', 'prototype/windows/themes/default.css')
+        ->addItem('js_css', 'prototype/windows/themes/magento.css')
         ->addCss('lib/prototype/windows/themes/magento.css');    
     }
     
