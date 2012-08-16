@@ -116,8 +116,7 @@ class Pulsestorm_Launcher_Model_Observer
     
     protected function _addExtraFrontendFiles($controller)
     {
-        $layout             = $controller->getLayout();        
-        
+        $layout             = $controller->getLayout();                
         $head               = $layout->getBlock('head');
         if($head)
         {
