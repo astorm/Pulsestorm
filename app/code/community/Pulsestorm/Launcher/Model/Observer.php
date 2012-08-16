@@ -120,10 +120,22 @@ class Pulsestorm_Launcher_Model_Observer
         $head               = $layout->getBlock('head');
         if($head)
         {
+            $design = Mage::getDesign();
+
             $head->addCss('pulsestorm_launcher/main.css')
-            ->addItem('js_css', 'prototype/windows/themes/default.css')
-            ->addItem('js_css', 'prototype/windows/themes/magento.css')
-            ->addCss('lib/prototype/windows/themes/magento.css');    
+            ->addItem('js_css', 'prototype/windows/themes/default.css');
+            
+            //add window theme css — some versions have this in the skin, other in /js
+            $skin_url = $design->getSkinUrl('lib/prototype/windows/themes/magento.css');
+            $parts = explode('/',$skin_url);
+            if(in_array('base', $parts))
+            {
+                $head->addItem('js_css', 'prototype/windows/themes/magento.css');
+            }
+            else
+            {
+                $head->addCss('lib/prototype/windows/themes/magento.css');    
+            }
         }
     }
     
