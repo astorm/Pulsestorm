@@ -126,6 +126,10 @@ function get_migration_script_for_attribute($code)
     $m = Mage::getModel('catalog/resource_eav_attribute')
     ->loadByCode('catalog_product',$code);
     
+    if(!$m->getId())
+    {
+        error(sprintf("Could not find attribute [%s].",$code));
+    }
     //get a map of "real attribute properties to properties used in setup resource array
     $real_to_setup_key_legend = get_key_legend();
 
@@ -181,6 +185,12 @@ if(! (\$this instanceof Mage_Catalog_Model_Resource_Setup) )
 
 ";
     return $script;
+}
+
+function error($error)
+{
+    echo $error . "\n";
+    exit;
 }
 
 function usage()
