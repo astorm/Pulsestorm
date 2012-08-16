@@ -72,7 +72,11 @@ class Pulsestorm_Launcher_Model_Observer
         $block = $layout->createBlock('adminhtml/template')
         ->setTemplate('pulsestorm_launcher/hook.phtml')
         ->setLinks(Mage::getSingleton('pulsestorm_launcher/links')->getLinks());
-        $before_body_end->append($block);
+        
+        if($before_body_end)
+        {
+            $before_body_end->append($block);
+        }
         
     }
     
@@ -104,25 +108,30 @@ class Pulsestorm_Launcher_Model_Observer
         ->setTemplate('pulsestorm_launcher/js-nav.phtml')
         ->setJson($json)
         ->setCombinedCodes($code);
-        $before_body_end->append($block);    
+        if($before_body_end)
+        {
+            $before_body_end->append($block);    
+        }
     }
     
     protected function _addExtraFrontendFiles($controller)
     {
-        $layout             = $controller->getLayout();
-        
-        $designPackage = Mage::getDesign();        
+        $layout             = $controller->getLayout();        
         
         $head               = $layout->getBlock('head');
-        $head->addCss('pulsestorm_launcher/main.css')
-        ->addItem('js_css', 'prototype/windows/themes/default.css')
-        ->addItem('js_css', 'prototype/windows/themes/magento.css')
-        ->addCss('lib/prototype/windows/themes/magento.css');    
+        if($head)
+        {
+            $head->addCss('pulsestorm_launcher/main.css')
+            ->addItem('js_css', 'prototype/windows/themes/default.css')
+            ->addItem('js_css', 'prototype/windows/themes/magento.css')
+            ->addCss('lib/prototype/windows/themes/magento.css');    
+        }
     }
     
     protected function _shouldBail($controller)
     {
-        return strpos($controller->getFullActionName(), 'adminhtml_') !== 0;
+        return strpos($controller->getFullActionName(), 'adminhtml_') !== 0 ||
+        $controller->getRequest()->isAjax();
     }
     
 }
