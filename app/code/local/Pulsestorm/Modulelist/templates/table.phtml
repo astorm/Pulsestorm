@@ -3,14 +3,16 @@
 		<tr>
 			<th>Name</th>
 			<th>Active</th>			
+			<th>Version</th>
 			<th>Path</th>
 			<th>Path Exists</th>
 			<th>Found <code>confix.xml</code>?</th>						
 		</tr>
 		<?php foreach($this->getList() as $item): ?>
 		<tr>
-			<th class="pulsestorm_modulelist_name"><?php echo $item->getName(); ?></th>
+			<th class="pulsestorm_modulelist_name"><?php echo $item->getName(); ?></th>			
 			<?php echo $this->trueFalseCell($item->getActive(),'td','pulsestorm_modulelist_active'); ?>
+			<td><?php echo $item->getModuleVersion(); ?></td>
 			<!-- <td class="pulsestorm_modulelist_active"><?php echo $item->getActive(); ?></td> -->
 			<td class="pulsestorm_modulelist_path"><?php echo $item->getPath(); ?></td>			
 			<?php echo $this->yesNoCell($item->getPathExists()); ?>

@@ -5,17 +5,17 @@
 			<version>0.1.0</version>
 		</Pulsestorm_Modulelist>
 	</modules>
-	<admin>
-		<routers>
-			<pulsestorm_modulelist>
-				<use>admin</use>
-				<args>
-					<module>Pulsestorm_Modulelist</module>
-					<frontName>pulsestorm_modulelist</frontName>
-				</args>
-			</pulsestorm_modulelist>
-		</routers>
-	</admin>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Pulsestorm_Modulelist before="Mage_Adminhtml">Pulsestorm_Modulelist</Pulsestorm_Modulelist>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>  
 	
 	<global>
 		<blocks>
