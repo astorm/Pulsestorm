@@ -3,7 +3,7 @@
 	<modules>
 		<Pulsestorm_Javascriptevent>
 			<active>true</active>
-			<codePool>local</codePool>
+			<codePool>community</codePool>
 		</Pulsestorm_Javascriptevent>
 	</modules>
 </config>
