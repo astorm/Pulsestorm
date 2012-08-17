@@ -3,7 +3,7 @@
 	<modules>
 		<Pulsestorm_Modulelist>
 			<active>true</active>
-			<codePool>local</codePool>
+			<codePool>community</codePool>
 		</Pulsestorm_Modulelist>
 	</modules>
 </config>
