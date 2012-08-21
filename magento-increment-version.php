@@ -42,7 +42,71 @@
         
         return $answer - 1;
     }
+    
+    function dirUpUntilFindSystemPwd($path, $times=0)
+    {
+        $base = `pwd`;
+        for($i=0;$i<$times;$i++)
+        {
+            $base = dirname($base);
+        }
+        if(file_exists($base . '/' . $path))
+        {
+            return $base . '/' . $path;
+        }        
+        if($base == '/')
+        {
+            return false;
+        }
+        $times++;
+        return dirUpUntilFindSystemPwd($path, $times);
+    }
+    function dirUpUntilFindCwd($path)
+    {      
+        static $original_path;        
+        $original_path = $original_path ? $original_path : getcwd();
+        
+        static $searched;
+        $searched = $searched ? $searched : array();
+        $searched[] = getcwd();
+        
+        
+        if(file_exists($path) || is_dir($path))
+        {
+            $path = realpath($path);
+            chdir($original_path);
+            return $path;
+        }
+        if(getcwd() == '/')
+        {
+            chdir($original_path);
+            return false;
+        }
+        chdir('..');
+        return dirUpUntilFind($path);
+    }
+        
+    function getModuleNameFromConfigFile($path)
+    {
+        $xml = simplexml_load_file($path);
+        if(!$xml)
+        {
+        }
+    }
+    
     function main($argv)
+    {
+        $path = dirUpUntilFindSystemPwd('etc/config.xml');
+        if(!$path)
+        {
+            error("Could not find etc/config.xml");
+        }
+        
+        $module = getModuleNameFromConfigFile();
+        $results = input("Found $path");
+    }
+    
+    function fully_interactive($argv)
     {        
         if(!is_dir('app'))
         {
