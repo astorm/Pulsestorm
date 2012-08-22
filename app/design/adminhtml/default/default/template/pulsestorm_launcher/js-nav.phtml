@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 <script type="text/javascript">
     var pulsestorm_launcher_menu            = <?php echo $this->getJson(); ?>;    
     
-    //global function ponter into the dom:loaded closure
+    //global function ponters into the dom:loaded closure
     var pulsestorm_launcher_show_launcher;  
     var pulsestorm_launcher_register_link;
     document.observe('dom:loaded', function(){
@@ -164,6 +164,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             opendialog_launcher(content);
             
             setTimeout(function(){
+                //ensuring this is never off screen
+                if( parseInt($('pulsestorm_launcher').getStyle('top'),10) < 5)
+                {
+                    $('pulsestorm_launcher').setStyle({'top':'10px'});
+                };                
                 //jiggering default magento styles
                 $$('td.magento_e')[0].setStyle({'display':'none'});
                 $$('td.magento_w')[0].setStyle({'display':'none'});
