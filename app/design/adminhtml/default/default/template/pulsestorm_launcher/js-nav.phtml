@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ?>
 <script type="text/javascript">
     var pulsestorm_launcher_menu            = <?php echo $this->getJson(); ?>;    
-    
+    var pulsestorm_launcher_search_url      = <?php echo $this->getSearchUrlJson(); ?>;
     //global function ponters into the dom:loaded closure
     var pulsestorm_launcher_show_launcher;  
     var pulsestorm_launcher_register_link;
@@ -181,6 +181,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     alert("test");
                 }
                 //test = new Autocompleter.Local('pulsestorm_launcher_input','pulsestorm_launcher_results',['foo','baz','bar'],{'updateElement':thing});
+                
+                var timeout_search=false;
                 $('pulsestorm_launcher_input').observe('keyup', function(e){
                     if(e.which == 40 || e.which == 38)
                     {
@@ -193,7 +195,51 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                         go_to_highlighted_link();
                         return;
                     }
-                    // console.log("Called the Keup Setup in the timeout");
+                    
+                    //cancel/reset interval
+                    if(timeout_search)
+                    {
+                        clearTimeout(timeout_search); 
+                    }
+                    if($F('pulsestorm_launcher_input') && $F('pulsestorm_launcher_input').length > 2)
+                    {
+                        timeout_search = setTimeout(function(){
+                            var url = pulsestorm_launcher_search_url.url;
+                            url += ('?query='+$F('pulsestorm_launcher_input'));
+                            // var url = 'http://magento1point7pointzeropoint1.dev/index.php/admin/index/globalSearch/key/ac3d62400d96f06be161863f7e4470d3/?query=nokia';
+                            
+                            var img = new Element('img');
+                            img.src = '/skin/adminhtml/default/default/images/ajax-loader.gif';                            
+                            var p = new Element('p');
+                            p.insert(img);
+                            p.id = 'pulsestorm_launcher_throbber';
+                            $('pulsestorm_launcher_results').insert(p);
+                            
+                            new Ajax.Request(url, {
+                                method: 'get',
+                                onSuccess: function(transport) {
+                                    var container = new Element('div');
+                                    container.update(transport.responseText);
+                                    $('pulsestorm_launcher_throbber').remove();
+                                    container.getElementsBySelector('li strong').each(function(element){                                        
+                                        if(!element.parentNode)
+                                        {
+                                            return;
+                                        }
+                                        
+                                        var url = $(element.parentNode).readAttribute('url');
+                                        var row = '<p><a href="'+url+'">'+element.innerHTML+'</a></p>';
+                                        $('pulsestorm_launcher_results').insert(row);
+                                        //console.log(element);
+                                        //console.log(element.parentNode);
+                                    });
+                                }    
+                            });                    
+
+                        }, 100);
+                    }
+                    
+                    //perform instant nav/config search
                     var results = pulsestorm_launcher_search_menu($F('pulsestorm_launcher_input'));
                     if(!$(results).collect)
                     {

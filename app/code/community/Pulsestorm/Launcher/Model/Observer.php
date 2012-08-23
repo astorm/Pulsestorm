@@ -104,10 +104,17 @@ class Pulsestorm_Launcher_Model_Observer
             $code = $first . '_' . $second;
         }
         
+        $url = Mage::getModel('adminhtml/url');
+        $search = new stdClass();
+        $search->url = $url->getUrl('adminhtml/index/globalSearch');
+        $search = Mage::helper('core')->jsonEncode($search);
+        
         $block              = $layout->createBlock('adminhtml/template')
         ->setTemplate('pulsestorm_launcher/js-nav.phtml')
         ->setJson($json)
+        ->setSearchUrlJson($search)
         ->setCombinedCodes($code);
+        
         if($before_body_end)
         {
             $before_body_end->append($block);    
