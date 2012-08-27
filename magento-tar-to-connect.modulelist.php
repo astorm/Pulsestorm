@@ -1,11 +1,11 @@
 <?php
 return array(
-'base_dir'           => '/Users/alanstorm/Documents/github/Pulsestorm/var/build',
+'base_dir'           => '/fakehome/Documents/github/Pulsestorm/var/build',
 'archive_files'      => 'Pulsestorm_Modulelist.tar',
 'extension_name'     => 'Module_List',
 'extension_version'  => '0.1.3',
 'archive_connect'    => 'Module_List-0.1.3.tgz',
-'path_output'        => '/Users/alanstorm/Documents/github/Pulsestorm/var/build-connect',
+'path_output'        => '/fakehome/Documents/github/Pulsestorm/var/build-connect',
 
 
 'stability'          => 'stable',
