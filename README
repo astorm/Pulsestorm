@@ -7,7 +7,7 @@ This repository contains open source code modules and scripts to help developers
 
 You can find Pulse Storm on the web at http://www.pulsestorm.net/
 
-IMPOTANT: Module enabling files in 
+IMPORTANT: Module enabling files in 
 
     app/etc/modules
     
@@ -28,6 +28,11 @@ folder.  This archive is **not** a Magento Connect module.  Rather, it's an arch
 
 Included Modules
 --------------------------------------------------
+###Pulse Storm Launcher
+
+The Pulse storm launcher provides the Magento admin console with a Quicksilver like plugin for immediate access to Magento navigation items, system configuration sections, and the Magento global search.
+
+Original Post: http://alanstorm.com/magento_admin_navigation_launcher
 
 ###Layout Unremove
 
@@ -55,7 +60,7 @@ Original Post: http://alanstorm.com/magento_configuration_search
 
 ###X-UA-Compatible
 
-A quick and dirty module that inserts a X-UA-Compatible meta head to force IE 9 into IE 8 compatability mode.  Useful for users who are stuck on an older version of Magento, and/or can't manually upgrade Prototype JS. 
+A quick and dirty module that inserts a X-UA-Compatible meta head to force IE 9 into IE 8 compatibility mode.  Useful for users who are stuck on an older version of Magento, and/or can't manually upgrade Prototype JS. 
 
 ###Layout Viewer
 
@@ -75,3 +80,18 @@ Original Post: http://alanstorm.com/layouts_blocks_and_templates
 * 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+Shell Scripts
+--------------------------------------------------
+The scripts included here are **not** the finest example of PHP shell scripting.  They're here to do a job, and that's it.  Improvements are more than welcome.
+
+
+###Magento Attribute Migration Generator
+
+This script generates a setup resource script for any existing Magento attribute.
+
+    ./magento-create-setup.php attribute_code
+    
+NOTE: Must be run from the root of the Magento system with the existing attribute.    
+
+Original Post: http://alanstorm.com/magento_attribute_migration_generator
