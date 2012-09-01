@@ -28,7 +28,7 @@ default to **false**, which means the extension will not be loaded by default.  
 
 Build Instructions
 --------------------------------------------------
-(Like most build scripts, this is a little janky. Better methods are more than welcome)
+Building is a little janky right now, improvements are more than welcome.
 
 The folder structure of this repository mirrors a standard Magento community edition install.  To build individual modules, simply run to the bash build scripts located at the root of the project
 
@@ -40,6 +40,39 @@ After running, you'll find a tar archive in the
 	var/build/
 	
 folder.  This archive is **not** a Magento Connect module.  Rather, it's an archive that contains all the files you'll need to manually install in your system.	
+
+Tar to Connect
+--------------------------------------------------
+The `magento-tar-to-connect.php` can be used to convert a plain tar archive into a Magento Connect ready package.  Usage is as follows
+
+    $ magento-tar-to-connect.php [config.php]
+    
+Where `config.php` is the path to a configuration file.  Configuration files are a plain PHP `include` that returns an array in the following format
+
+    return array(
+    'base_dir'           => '/fakehome/Documents/github/Pulsestorm/var/build',
+    'archive_files'      => 'Pulsestorm_Modulelist.tar',
+    'extension_name'     => 'Module_List',
+    'extension_version'  => '0.1.3',
+    'archive_connect'    => 'Module_List-0.1.3.tgz',
+    'path_output'        => '/fakehome/Pulsestorm/var/build-connect',
+    
+    
+    'stability'          => 'stable',
+    'license'            => 'MIT',
+    'channel'            => 'community',
+    'summary'            => 'Reports on installed Magento code modules',
+    'description'        => 'This extension adds a section to the Magento Admin console which lists all install code modules.  Modules are distinct from Magento Connect packages.  A Connect package may contain a module, but it not limited to a module.',
+    'notes'              => 'Added reporting on module version, moved to community code pool.',
+    
+    'author_name'        => 'Alan Storm',
+    'author_user'        => 'alanstorm',
+    'author_email'       => 'foo@example.com',
+    'php_min'            => '5.2.0',
+    'php_max'            => '6.0.0',
+    )
+
+This script does not (currently) support every Magento Connect package feature — instead this is a bare minimum of fields needed to get a working extension.  All files are added with the `"Magento other"` label, which allows the package directory structure to mirror an actual Magento system.
 
 Included Modules
 --------------------------------------------------
