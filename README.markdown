@@ -28,6 +28,8 @@ default to **false**, which means the extension will not be loaded by default.  
 
 Build Instructions
 --------------------------------------------------
+(Like most build scripts, this is a little janky. Better methods are more than welcome)
+
 The folder structure of this repository mirrors a standard Magento community edition install.  To build individual modules, simply run to the bash build scripts located at the root of the project
 
 	$ cd /path/to/checkout

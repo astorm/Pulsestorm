@@ -4,7 +4,7 @@ return array(
 'archive_files'      => 'Pulsestorm_Launcher.tar',
 'extension_name'     => 'Pulsestorm_Launcher',
 'extension_version'  => '1.0.0',
-'path_output'        => '/fakehome/Documents/github/Pulsestorm/var/build-connect',
+'path_output'        => '/fakehome/Pulsestorm/var/build-connect',
 
 'stability'          => 'stable',
 'license'            => 'MIT',

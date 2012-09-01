@@ -5,7 +5,7 @@ return array(
 'extension_name'     => 'Module_List',
 'extension_version'  => '0.1.3',
 'archive_connect'    => 'Module_List-0.1.3.tgz',
-'path_output'        => '/fakehome/Documents/github/Pulsestorm/var/build-connect',
+'path_output'        => '/fakehome/Pulsestorm/var/build-connect',
 
 
 'stability'          => 'stable',
