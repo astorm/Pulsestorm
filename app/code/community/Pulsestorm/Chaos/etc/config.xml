@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Chaos>
+			<version>0.1.0</version>
+		</Pulsestorm_Chaos>
+	</modules>
+
+    <global>
+        <events>
+<!-- 
+            //resource_get_tablename
+            //core_collection_abstract_load_before
+            //core_collection_abstract_load_after
+ -->
+            <controller_action_predispatch>
+                <observers>
+                    <pulsestorm_chaos_main>
+                        <type>singleton</type>
+                        <class>pulsestorm_chaos/observer</class>
+                        <method>setup</method>
+                    </pulsestorm_chaos_main>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+        
+        <models>
+            <pulsestorm_chaos>
+                <class>Pulsestorm_Chaos_Model</class>
+            </pulsestorm_chaos>
+        </models>            
+        
+    </global>
+
+
+
+<!-- 
+	<frontend>
+		<routers>
+			<pulsestorm_chaos>
+				<use>standard</use>
+				<args>
+					<module>Pulsestorm_Chaos</module>
+					<frontName>pulsestorm_chaos</frontName>
+				</args>
+			</pulsestorm_chaos>
+		</routers>
+	</frontend>
+	<global>
+		<blocks>
+			<pulsestorm_chaos>
+				<class>Pulsestorm_Chaos_Block</class>
+			</pulsestorm_chaos>
+		</blocks>
+		<models>
+			<pulsestorm_chaos>
+				<class>Pulsestorm_Chaos_Model</class>
+			</pulsestorm_chaos>
+		</models>
+		<helpers>
+			<pulsestorm_chaos>
+				<class>Pulsestorm_Chaos_Helper</class>
+			</pulsestorm_chaos>
+		</helpers>
+	</global>
+ -->
+</config>
