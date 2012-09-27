@@ -116,6 +116,12 @@ Implements a query string based way to view layout information for a particular 
 
 Original Post: http://alanstorm.com/layouts_blocks_and_templates
 
+###Chaos
+
+Inspired by the Netflix Chaos monkey, Chaos is the start to an extension which provides a framework for swapping configuration node values randomly.  Ships with code that will swap Magento in and out of flat category/product mode at random, helping your team ensure their extensions/customizations work as expected. 
+
+
+
 Shell Scripts
 --------------------------------------------------
 The scripts included here are **not** the finest example of PHP shell scripting.  They're here to do a job, and that's it.  Improvements are more than welcome.
