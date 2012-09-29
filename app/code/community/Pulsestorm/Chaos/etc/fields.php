@@ -13,4 +13,8 @@
 return array(
     'catalog/frontend/flat_catalog_category'=>'getRandomBoolean',
     'catalog/frontend/flat_catalog_product'=>'getRandomBoolean',
+//     'design/theme/default'=>function(){
+//         $themes = array('modern','default');
+//         return $themes[rand(0,1)];
+//     }
 );
