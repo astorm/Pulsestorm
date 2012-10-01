@@ -18,4 +18,19 @@ class Pulsestorm_Modulelist_Block_Top extends Pulsestorm_Modulelist_Block_Templa
 		return $this->getLayout()->createBlock('pulsestorm_modulelist/moduletable')
 		->setList($list);
 	}
+	
+	public function getLocalWarnings()
+	{
+	    $config = Mage::getConfig();
+	    $messages = array();
+	    
+        $global = $config->getNode('global');
+
+	    if($global->is('disable_local_modules',true))
+	    {
+            $message = $this->__('An unknown module has set the <code>global/disable_local_modules</code> node to true. This will disable all local modules.');	    
+            $messages[] = $message;
+	    }
+	    return $messages;
+	}
 }

@@ -13,7 +13,11 @@
 	
 	
 	<h2>local</h2>
-	<?php echo $this->createTableBlock($report->getLocalList())->_toHtml(); ?>
+	<?php 
+	    $local = $this->createTableBlock($report->getLocalList());
+	    $local->setExtraWarnings($this->getLocalWarnings());
+	    echo $local->_toHtml(); 
+	?>
 	
 	<h2>Warnings</h2>
 	

@@ -8,6 +8,16 @@
 			<th>Path Exists</th>
 			<th>Found <code>confix.xml</code>?</th>						
 		</tr>
+		<?php if($this->getExtraWarnings()): ?>
+		<tr>
+		    <td colspan="6" class="pulsestorm_modulelist_no">
+		    <?php foreach($this->getExtraWarnings() as $string): ?>
+		    <p><?php echo $string ?></p>
+		    <?php endforeach;?>
+		    </td>
+		</tr>
+		<?php endif; ?>
+		
 		<?php foreach($this->getList() as $item): ?>
 		<tr>
 			<th class="pulsestorm_modulelist_name"><?php echo $item->getName(); ?></th>			
