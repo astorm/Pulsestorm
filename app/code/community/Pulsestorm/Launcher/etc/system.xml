@@ -19,7 +19,7 @@
                     <fields>
 						<shortcut_code_first>
                             <label>Keyboard Shortcut First</label>
-                            <comment>The keycode of the first keyboard shortcut (defulats to "ctrl"/"17")</comment>
+                            <comment>The keycode of the first keyboard shortcut (defaults to "ctrl"/"17")</comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
@@ -29,7 +29,7 @@
 						
 						<shortcut_code_second>
                             <label>Keyboard Shortcut Second</label>
-                            <comment>The keycode of the first keyboard shortcut (defulats to "m"/"77")</comment>
+                            <comment>The keycode of the first keyboard shortcut (defaults to "m"/"77")</comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
