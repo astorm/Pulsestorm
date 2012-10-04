@@ -183,6 +183,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 //test = new Autocompleter.Local('pulsestorm_launcher_input','pulsestorm_launcher_results',['foo','baz','bar'],{'updateElement':thing});
                 
                 var timeout_search=false;
+                var search_requests = [];
                 $('pulsestorm_launcher_input').observe('keyup', function(e){
                     if(e.which == 40 || e.which == 38)
                     {
@@ -204,6 +205,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     if($F('pulsestorm_launcher_input') && $F('pulsestorm_launcher_input').length > 2)
                     {
                         timeout_search = setTimeout(function(){
+                            //abort other pending requests
+                            if(search_requests.length > 0)
+                            {
+                                var old_search;
+                                while(old_search = search_requests.pop())
+                                {
+                                    old_search.transport.abort();
+                                    console.log("aborting");
+                                }
+                            }
+                            
                             var url = pulsestorm_launcher_search_url.url;
                             url += ('?query='+$F('pulsestorm_launcher_input'));
                             // var url = 'http://magento1point7pointzeropoint1.dev/index.php/admin/index/globalSearch/key/ac3d62400d96f06be161863f7e4470d3/?query=nokia';
@@ -215,7 +227,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                             p.id = 'pulsestorm_launcher_throbber';
                             $('pulsestorm_launcher_results').insert(p);
                             
-                            new Ajax.Request(url, {
+                            var search_request = new Ajax.Request(url, {
                                 method: 'get',
                                 onSuccess: function(transport) {
                                     var container = new Element('div');
@@ -235,6 +247,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                     });
                                 }    
                             });                    
+
+                            search_requests.push(search_request);
 
                         }, 100);
                     }
