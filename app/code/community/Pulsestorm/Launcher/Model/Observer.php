@@ -18,16 +18,16 @@ class Pulsestorm_Launcher_Model_Observer
         {
             return;
         }
-        
+
         $this->_addExtraFrontendFiles($controller);
 
         $json = $this->_renderDefaultNavigationJson($controller);
 
         $this->_addMainJavascript($controller,$json);
-        
 
-    }    
-    
+
+    }
+
     public function addConfigNav($observer)
     {
         $controller         = $observer->getAction();
@@ -35,10 +35,10 @@ class Pulsestorm_Launcher_Model_Observer
         {
             return;
         }
-    
+
         $launcher_links = Mage::getSingleton('pulsestorm_launcher/links');
         $block = $controller->getLayout()->createBlock('adminhtml/system_config_tabs')->initTabs();
-        
+
         $tabs = $block->getTabs();
         foreach($tabs as $tab)
         {
@@ -55,9 +55,9 @@ class Pulsestorm_Launcher_Model_Observer
                 $url   = $url->getUrl('adminhtml/system_config/edit', array('_current'=>true, 'section'=>$code));
                 $launcher_links->addLink($label,$url);
             }
-        }    
+        }
     }
-    
+
     public function addHookJavascript($observer)
     {
         $controller         = $observer->getAction();
@@ -65,65 +65,65 @@ class Pulsestorm_Launcher_Model_Observer
         {
             return;
         }
-    
+
         $layout             = $controller->getLayout();
         $before_body_end    = $layout->getBlock('before_body_end');
-        
+
         $block = $layout->createBlock('adminhtml/template')
         ->setTemplate('pulsestorm_launcher/hook.phtml')
         ->setLinks(Mage::getSingleton('pulsestorm_launcher/links')->getLinks());
-        
+
         if($before_body_end)
         {
             $before_body_end->append($block);
         }
-        
+
     }
-    
+
     protected function _renderDefaultNavigationJson($controller)
     {
         $layout             = $controller->getLayout();
         $block              = $layout->createBlock('pulsestorm_launcher/page_menu');
         $menu               = $block->getMenuArray();
-        $json               = Mage::helper('core')->jsonEncode($menu);    
+        $json               = Mage::helper('core')->jsonEncode($menu);
         $json               = $block->secretKeyJsonStringReplace($json);
         return $json;
     }
-    
+
     protected function _addMainJavascript($controller, $json)
     {
         $layout             = $controller->getLayout();
         $before_body_end    = $layout->getBlock('before_body_end');
-        
+
         $first = Mage::getStoreConfig('pulsestorm_launcher/options/shortcut_code_first');
         $second  = Mage::getStoreConfig('pulsestorm_launcher/options/shortcut_code_second');
-        
+
         $code = '17_32';        //default to ctrl-space
         if(is_numeric($first) && is_numeric($second))
         {
             $code = $first . '_' . $second;
         }
-        
+
         $url = Mage::getModel('adminhtml/url');
         $search = new stdClass();
         $search->url = $url->getUrl('adminhtml/index/globalSearch');
         $search = Mage::helper('core')->jsonEncode($search);
-        
+
         $block              = $layout->createBlock('adminhtml/template')
         ->setTemplate('pulsestorm_launcher/js-nav.phtml')
         ->setJson($json)
         ->setSearchUrlJson($search)
         ->setCombinedCodes($code);
-        
+
         if($before_body_end)
         {
-            $before_body_end->append($block);    
+            $before_body_end->append($block);
         }
     }
-    
+
     protected function _addExtraFrontendFiles($controller)
     {
-        $layout             = $controller->getLayout();                
+        $layout             = $controller->getLayout();
         $head               = $layout->getBlock('head');
         if($head)
         {
@@ -131,7 +131,7 @@ class Pulsestorm_Launcher_Model_Observer
 
             $head->addCss('pulsestorm_launcher/main.css')
             ->addItem('js_css', 'prototype/windows/themes/default.css');
-            
+
             //add window theme css — some versions have this in the skin, other in /js
             $skin_url = $design->getSkinUrl('lib/prototype/windows/themes/magento.css');
             $parts = explode('/',$skin_url);
@@ -141,15 +141,15 @@ class Pulsestorm_Launcher_Model_Observer
             }
             else
             {
-                $head->addCss('lib/prototype/windows/themes/magento.css');    
+                $head->addCss('lib/prototype/windows/themes/magento.css');
             }
         }
     }
-    
+
     protected function _shouldBail($controller)
     {
-        return strpos($controller->getFullActionName(), 'adminhtml_') !== 0 ||
+        return !($controller instanceof Mage_Adminhtml_Controller_Action) ||
         $controller->getRequest()->isAjax();
     }
-    
+
 }
