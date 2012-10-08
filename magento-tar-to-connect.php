@@ -169,6 +169,35 @@ function load_config($config_name=false)
     return $config;
 }
 
+function check_module_version_vs_package_version($files, $extension_version)
+{
+    $configs = array();
+    foreach($files as $file)
+    {
+        if(basename($file) == 'config.xml')
+        {
+            $configs[] = $file;
+        }
+    }
+    
+    foreach($configs as $file)
+    {
+        $xml = simplexml_load_file($file);
+        $version_strings = $xml->xpath('//version');
+        foreach($version_strings as $version)
+        {
+            if($version != $extension_version)
+            {
+                error(
+                    "Extension Version [$extension_version] does not match " .
+                    "module version [$version] found in a config.xml file.  Add " .
+                    "'skip_version_compare'   => true  to configuration to skip this check."
+                );
+            }
+        }
+    }
+}
+
 function main($argv)
 {
     $this_script = array_shift($argv);
@@ -189,6 +218,12 @@ function main($argv)
     $all        = glob_recursive($temp_dir  . '/*');
     $dirs       = glob_recursive($temp_dir .'/*',GLOB_ONLYDIR);
     $files      = array_diff($all, $dirs);
+    
+    if(!$config['skip_version_compare'])
+    {
+        check_module_version_vs_package_version($files, $config['extension_version']);
+    }
+        
     $xml        = create_package_xml($files,$temp_dir,$config);
     
     file_put_contents($temp_dir . '/package.xml',$xml);    
