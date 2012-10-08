@@ -148,7 +148,7 @@ class Pulsestorm_Launcher_Model_Observer
 
     protected function _shouldBail($controller)
     {
-        return !($controller instanceof Mage_Adminhtml_Controller_Action) ||
+        return strpos($controller->getFullActionName(), 'adminhtml_') !== 0 ||
         $controller->getRequest()->isAjax();
     }
 
