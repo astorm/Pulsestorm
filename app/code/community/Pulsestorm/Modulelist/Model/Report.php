@@ -49,7 +49,9 @@ class Pulsestorm_Modulelist_Model_Report extends Varien_Object
 			    if(!$name){ continue; }
 			    
 			    $version = $name->version;
-			    if(!$version) { continue; }
+			    if(!$version) { 
+			        $version = '?';
+			    }
 			    
 			    $version = (string) $version;
 			    $o->setModuleVersion($version);
