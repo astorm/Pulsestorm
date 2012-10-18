@@ -43,13 +43,13 @@ class Pulsestorm_Modulelist_Model_Report extends Varien_Object
 			{
 			    $xml = simplexml_load_file($o->getPath() . '/etc/config.xml');
 			    $modules = $xml->modules;
-			    if(!$modules){ break; }
+			    if(!$modules){ continue; }
 			    
 			    $name = $modules->{$item->getName()};
-			    if(!$name){ break; }
+			    if(!$name){ continue; }
 			    
 			    $version = $name->version;
-			    if(!$version) { break; }
+			    if(!$version) { continue; }
 			    
 			    $version = (string) $version;
 			    $o->setModuleVersion($version);
