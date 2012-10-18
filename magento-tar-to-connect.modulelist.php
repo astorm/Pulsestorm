@@ -3,7 +3,7 @@ return array(
 'base_dir'           => '/fakehome/Documents/github/Pulsestorm/var/build',
 'archive_files'      => 'Pulsestorm_Modulelist.tar',
 'extension_name'     => 'Module_List',
-'extension_version'  => '0.2.1',
+'extension_version'  => '0.2.2',
 'archive_connect'    => 'Module_List-0.2.1.tgz',
 'path_output'        => '/fakehome/Pulsestorm/var/build-connect',
 
