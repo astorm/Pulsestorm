@@ -4,7 +4,7 @@ return array(
 'archive_files'      => 'Pulsestorm_Modulelist.tar',
 'extension_name'     => 'Module_List',
 'extension_version'  => '0.2.2',
-'archive_connect'    => 'Module_List-0.2.1.tgz',
+'archive_connect'    => 'Module_List-0.2.2.tgz',
 'path_output'        => '/fakehome/Pulsestorm/var/build-connect',
 
 
@@ -20,4 +20,5 @@ return array(
 'author_email'       => 'foo@example.com',
 'php_min'            => '5.2.0',
 'php_max'            => '6.0.0',
+'skip_version_compare' => false,
 );

@@ -3,7 +3,7 @@ return array(
 'base_dir'               => '/fakehome/Documents/github/Pulsestorm/var/build',
 'archive_files'          => 'Pulsestorm_Launcher.tar',
 'extension_name'         => 'Pulsestorm_Launcher',
-'extension_version'      => '1.0.1',
+'extension_version'      => '1.0.2',
 'path_output'            => '/fakehome/Pulsestorm/var/build-connect',
 
 'stability'              => 'stable',
