@@ -57,9 +57,13 @@ function bootstrap()
     
     /* Run store or run website */
     $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
-   
-    Mage::init($mageRunCode, $mageRunType);
-    
+
+    if (method_exists('Mage', 'init')) {
+        Mage::init($mageRunCode, $mageRunType);
+    } else {
+        Mage::app($mageRunCode, $mageRunType);
+    }
+
     return $mageFilename;
 }
 
