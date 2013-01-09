@@ -171,7 +171,8 @@ class Pulsestorm_Launcher_Model_Observer
         
         if(!$root)
         {
-            return;
+            $root = $layout->createBlock('page/html', 'root');
+            $layout->setBlock('root', $root);
         }
 
         $block = $layout->createBlock('pulsestorm_launcher/breadcrumbs', 'breadcrumbs');
