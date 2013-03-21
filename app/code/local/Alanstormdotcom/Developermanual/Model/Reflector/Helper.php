@@ -115,8 +115,12 @@ class Alanstormdotcom_Developermanual_Model_Reflector_Helper extends Mage_Core_M
 	
 	protected function _getDefaultValue(Reflector $prop)
 	{
-		if($prop->isProtected()) {
+		if($prop->isProtected() && method_exists($prop,'setAccesible')) {
 			$prop->setAccessible(true);
+		}
+		else if($prop->isProtected())
+		{
+		    return '[UNKNOWN DEFAULT VALUE] (upgrade to PHP 5.3+ to reflect into protected properties)';
 		}
 		
 		if($prop->isStatic()) {

@@ -21,6 +21,7 @@ class Alanstormdotcom_Developermanual_Model_Source_Helper extends Mage_Core_Mode
 		try {
 			$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($module . '/Helper'));
 		} catch (UnexpectedValueException $e) {
+		    Mage::Log($e->getMessage());
 			return '';
 		}
 		
@@ -63,7 +64,7 @@ class Alanstormdotcom_Developermanual_Model_Source_Helper extends Mage_Core_Mode
 		
 		$dirs = array();
 		foreach ($it as $fileinfo) {
-			if(! $fileinfo->isDot() && $fileinfo->isDir()) {
+			if(! $fileinfo->isDot() && $fileinfo->isDir() && file_exists($fileinfo->getPathName() . '/Helper')) {
 				try {
 					$tmp = new DirectoryIterator($fileinfo->getPathName() . '/Helper');
 				} catch(UnexpectedValueException $e) {
