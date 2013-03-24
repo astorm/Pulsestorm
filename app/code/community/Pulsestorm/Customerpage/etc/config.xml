@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Pulsestorm_Customerpage>
+			<version>0.1.0</version>
+		</Pulsestorm_Customerpage>
+	</modules>
+    <frontend>
+        <layout>
+            <updates>
+                <pulsestorm_customerpage module="Pulsestorm_Customerpage">
+                    <file>pulsestorm_customerpage.xml</file>
+                </pulsestorm_customerpage>
+            </updates>
+        </layout>    
+        <routers>
+            <pulsestorm_customerpage>
+                <use>standard</use>
+                <args>
+                    <module>Pulsestorm_Customerpage</module>
+                    <frontName>pulsestorm_customerpage</frontName>
+                </args>
+            </pulsestorm_customerpage>
+        </routers>        
+    </frontend>
+    
+    <global>
+        <helpers>
+            <pulsestorm_customerpage>
+                <class>Pulsestorm_Customerpage_Helper</class>
+            </pulsestorm_customerpage>
+        </helpers>        
+    </global>
+    
+</config>

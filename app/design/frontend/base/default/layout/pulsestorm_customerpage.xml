@@ -1,0 +1,19 @@
+<layout>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>our_new_section</name>
+                <path>pulsestorm_customerpage/index/index</path>
+                <label>Our New Account Section</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <pulsestorm_customerpage_index_index>
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="core/template" name="pulsestorm_customerpage_content" template="pulsestorm_customerpage.phtml"/>            
+        </reference>
+    </pulsestorm_customerpage_index_index>
+
+</layout>
