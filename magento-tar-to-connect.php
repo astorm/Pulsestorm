@@ -14,11 +14,11 @@ error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 date_default_timezone_set('America/Los_Angeles');
 
-require_once dirname(__FILE__) . '/'. 'vendor/magento/downloader/lib/Mage/Archive/Helper/File.php';
-require_once dirname(__FILE__) . '/'. 'vendor/magento/downloader/lib/Mage/Archive/Interface.php';
-require_once dirname(__FILE__) . '/'. 'vendor/magento/downloader/lib/Mage/Archive/Abstract.php';
-require_once dirname(__FILE__) . '/'. 'vendor/magento/downloader/lib/Mage/Archive/Tar.php';
-require_once dirname(__FILE__) . '/'. 'vendor/magento/downloader/lib/Mage/Exception.php';
+require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Helper/File.php';
+require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Interface.php';
+require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Abstract.php';
+require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Tar.php';
+require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Exception.php';
 
 //from http://php.net/glob
 if ( ! function_exists('glob_recursive'))
@@ -169,6 +169,31 @@ function load_config($config_name=false)
     return $config;
 }
 
+function get_module_version($files)
+{
+    $configs = array();
+    foreach($files as $file)
+    {
+        if(basename($file) == 'config.xml')
+        {
+            $configs[] = $file;
+        }
+    }
+    
+    foreach($configs as $file)
+    {
+        $xml = simplexml_load_file($file);
+        $version_strings = $xml->xpath('//version');
+        foreach($version_strings as $version)
+        {
+            if(!empty($version)) 
+            {
+                return (string)$version;
+            }
+        }
+    }
+}
+
 function check_module_version_vs_package_version($files, $extension_version)
 {
     $configs = array();
@@ -212,12 +237,22 @@ function main($argv)
     $temp_dir   = get_temp_dir();        
     chdir($temp_dir);
     shell_exec('cp '        . $base_dir . '/' . $archive_files . ' ' . $temp_dir);
-    shell_exec('tar -xvf '  . $temp_dir . '/' . $archive_files);
+    if(preg_match('/\.zip$/', $archive_files)) {
+        shell_exec('unzip -o '  . $temp_dir . '/' . $archive_files);
+    } else {
+        shell_exec('tar -xvf '  . $temp_dir . '/' . $archive_files);
+    }
     shell_exec('rm '        . $temp_dir . '/' . $archive_files);
     
     $all        = glob_recursive($temp_dir  . '/*');
     $dirs       = glob_recursive($temp_dir .'/*',GLOB_ONLYDIR);
     $files      = array_diff($all, $dirs);
+
+    if(isset($config['auto_detect_version']) && $config['auto_detect_version'] == true)
+    {
+        $config['extension_version'] = get_module_version($files);
+        $archive_connect = $config['extension_name'] . '-' . $config['extension_version'] . '.tgz';
+    }
     
     if(!$config['skip_version_compare'])
     {
