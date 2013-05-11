@@ -14,11 +14,11 @@ error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 date_default_timezone_set('America/Los_Angeles');
 
-require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Helper/File.php';
-require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Interface.php';
-require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Abstract.php';
-require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Archive/Tar.php';
-require_once dirname(__FILE__) . '/'. 'downloader/lib/Mage/Exception.php';
+require_once dirname(__FILE__) . '/'. 'vendor/downloader/lib/Mage/Archive/Helper/File.php';
+require_once dirname(__FILE__) . '/'. 'vendor/downloader/lib/Mage/Archive/Interface.php';
+require_once dirname(__FILE__) . '/'. 'vendor/downloader/lib/Mage/Archive/Abstract.php';
+require_once dirname(__FILE__) . '/'. 'vendor/downloader/lib/Mage/Archive/Tar.php';
+require_once dirname(__FILE__) . '/'. 'vendor/downloader/lib/Mage/Exception.php';
 
 //from http://php.net/glob
 if ( ! function_exists('glob_recursive'))

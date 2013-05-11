@@ -3,7 +3,7 @@ return array(
 'base_dir'               => '/fakehome/Documents/github/Pulsestorm/var/build',
 'archive_files'          => 'Developer_Manual.tar',
 'extension_name'         => 'Developer_Manual',
-'extension_version'      => '1.1.1',
+'extension_version'      => '1.1.2',
 'path_output'            => '/fakehome/Pulsestorm/var/build-connect',
 
 'stability'              => 'stable',
