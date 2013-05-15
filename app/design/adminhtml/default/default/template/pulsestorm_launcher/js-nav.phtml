@@ -57,7 +57,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 //console.log("No anchor found");
                 return;
             }
-            document.location = a[0].href;
+            document.location = a[0].href;            
         }
         
         var up = function()
@@ -212,7 +212,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 while(old_search = search_requests.pop())
                                 {
                                     old_search.transport.abort();
-                                    console.log("aborting");
+                                    // console.log("aborting");
                                 }
                             }
                             
@@ -247,7 +247,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                     });
                                 }    
                             });                    
-
+                            // console.log("starting search request");
                             search_requests.push(search_request);
 
                         }, 100);

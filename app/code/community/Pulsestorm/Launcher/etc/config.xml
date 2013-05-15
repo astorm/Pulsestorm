@@ -16,6 +16,17 @@
 			</pulsestorm_launcher>
 		</routers>
 	</frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Pulsestorm_Launcher after="Mage_Adminhtml">Pulsestorm_Launcher</Pulsestorm_Launcher>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>	
 	<global>
 		<blocks>
 			<pulsestorm_launcher>

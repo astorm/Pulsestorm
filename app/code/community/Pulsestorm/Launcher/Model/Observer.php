@@ -108,7 +108,7 @@ class Pulsestorm_Launcher_Model_Observer
         
         $url = Mage::getModel('adminhtml/url');
         $search = new stdClass();
-        $search->url = $url->getUrl('adminhtml/index/globalSearch');
+        $search->url = $url->getUrl('adminhtml/pulsestorm_launcher/globalSearch');
         $search = Mage::helper('core')->jsonEncode($search);
         
         $block              = $layout->createBlock('adminhtml/template')
