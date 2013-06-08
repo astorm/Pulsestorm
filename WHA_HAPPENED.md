@@ -1,17 +1,19 @@
-The Great Migration
---------------------------------------------------
-Prior to Summer '2013, this repository contained a number of individual Magento modules.
+Repository of Magento Tools from Pulse Storm LLC
+==================================================	
 
-These modules have been broken out into their own repositories.
+This repository is the former home of open source code modules and scripts to help developers work more efficiently with the Magento online retail system.  As of Summer 2013, these modules have been moved into individual repositories, listed below.
 
-This repository now contains **only** a few quick and dirty (but useful) Magento shell scripts.  
+If you've found any of these projects useful you may find Pulse Storm's commercial extensions and knowledge products useful as well 
 
-If there's something here you used to use, but can't find please <a href="http://alanstorm.com/contact">let me know</a> and I'll get you fixed up. 
+	http://store.pulsestorm.net/
 
-Apologies for the inconvenience, but this is a better long term organization strategy. 
+You can find Pulse Storm on the web at http://www.pulsestorm.net/
 
 New Repository Links
 --------------------------------------------------
+In addition to the new repository links, if you need the exact snapshot of the repository directly before this purchase, you can find it in the `pre_reorg` branch.  We'll also be keeping around a `_trash` folder for a few months.
+
+If you need help finding anything, please don't hesitate to [open an issue](https://github.com/astorm/Pulsestorm/issues), ot [get in touch directly](http://www.pulsestorm.net/contact-us/). 
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/Chaos">Chaos</a>
 
