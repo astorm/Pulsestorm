@@ -5,9 +5,7 @@ This repository is the former home of open source code modules and scripts to he
 
 If you've found any of these projects useful you may find Pulse Storm's commercial extensions and knowledge products useful as well 
 
-	http://store.pulsestorm.net/
-
-You can find Pulse Storm on the web at http://www.pulsestorm.net/
+http://store.pulsestorm.net/
 
 New Repository Links
 --------------------------------------------------
@@ -25,6 +23,8 @@ If you need help finding anything, please don't hesitate to [open an issue](http
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/LayoutViewer">LayoutViewer</a>
 
+<a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoAttributeMigrationGenerate">MagentoAttributeMigrationGenerate</a>
+
 <a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoTarToConnect">MagentoTarToConnect</a>
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/MagentoXuacompatible">MagentoXuacompatible</a>
@@ -34,4 +34,3 @@ If you need help finding anything, please don't hesitate to [open an issue](http
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/PulseStormModuleList">PulseStormModuleList</a>
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/SystemConfigurationSearch">SystemConfigurationSearch</a>
-
