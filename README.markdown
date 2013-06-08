@@ -25,6 +25,8 @@ If you need help finding anything, please don't hesitate to [open an issue](http
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/LayoutViewer">LayoutViewer</a>
 
+<a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoAttributeMigrationGenerate">MagentoAttributeMigrationGenerate</a>
+
 <a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoTarToConnect">MagentoTarToConnect</a>
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/MagentoXuacompatible">MagentoXuacompatible</a>
@@ -34,4 +36,3 @@ If you need help finding anything, please don't hesitate to [open an issue](http
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/PulseStormModuleList">PulseStormModuleList</a>
 
 <a class="repo-list-item css-truncate" href="http://github.com/astorm/SystemConfigurationSearch">SystemConfigurationSearch</a>
-
