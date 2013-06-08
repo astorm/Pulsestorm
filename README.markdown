@@ -5,9 +5,7 @@ This repository is the former home of open source code modules and scripts to he
 
 If you've found any of these projects useful you may find Pulse Storm's commercial extensions and knowledge products useful as well 
 
-	http://store.pulsestorm.net/
-
-You can find Pulse Storm on the web at http://www.pulsestorm.net/
+http://store.pulsestorm.net/
 
 New Repository Links
 --------------------------------------------------
