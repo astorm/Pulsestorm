@@ -9,7 +9,7 @@ http://store.pulsestorm.net/
 
 New Repository Links
 --------------------------------------------------
-In addition to the new repository links, if you need the exact snapshot of the repository directly before this purchase, you can find it in the `pre_reorg` branch.  We'll also be keeping around a `_trash` folder for a few months.
+In addition to the new repository links, if you need the exact snapshot of the repository directly before this change, you can find it in the `pre_reorg` branch.  We'll also keep the `_trash` folder for a few months.
 
 If you need help finding anything, please don't hesitate to [open an issue](https://github.com/astorm/Pulsestorm/issues), ot [get in touch directly](http://www.pulsestorm.net/contact-us/). 
 
