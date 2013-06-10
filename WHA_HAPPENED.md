@@ -13,24 +13,54 @@ In addition to the new repository links, if you need the exact snapshot of the r
 
 If you need help finding anything, please don't hesitate to [open an issue](https://github.com/astorm/Pulsestorm/issues), ot [get in touch directly](http://www.pulsestorm.net/contact-us/). 
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/Chaos">Chaos</a>
+###[Chaos](https://github.com/astorm/Chaos)
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/CustomerPage">CustomerPage</a>
+A Magento module that randomly changes configuration values — useful for developers who want to write bullet proof extensions. 
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/DeveloperManual">DeveloperManual</a>
+###[Configlint](https://github.com/astorm/Configlint)
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/LayoutUnremove">LayoutUnremove</a>
+A system for running validation tests against Magento's configuration files
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/LayoutViewer">LayoutViewer</a>
+###[CustomerPage](https://github.com/astorm/CustomerPage)
 
-<a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoAttributeMigrationGenerate">MagentoAttributeMigrationGenerate</a>
+A Magento module that demonstrates how to add a new page to the customer My Account section.
 
-<a class="repo-list-item css-truncate" href="https://github.com/astorm/MagentoTarToConnect">MagentoTarToConnect</a>
+###[DeveloperManual](https://github.com/astorm/DeveloperManual)
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/MagentoXuacompatible">MagentoXuacompatible</a>
+A Magento module for browsing block action methods, PHP Doc blocks, and more!
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/PulsestormLauncher">PulsestormLauncher</a>
+###[LayoutUnremove](https://github.com/astorm/LayoutUnremove)
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/PulseStormModuleList">PulseStormModuleList</a>
+A Magento extension that adds an `<unremove/>` tag to Magento's Layout XML.
 
-<a class="repo-list-item css-truncate" href="http://github.com/astorm/SystemConfigurationSearch">SystemConfigurationSearch</a>
+###[LayoutViewer](https://github.com/astorm/LayoutViewer)
+
+A Magento module that dumps layout information via query string.
+
+###[MagentoAttributeMigrationGenerate](https://github.com/astorm/MagentoAttributeMigrationGenerate)
+
+A Magento shell script to automatically create an attribute migration script for a specific attribute.  This allows developers to tweak their attributes in the UI, and then generate a script for deployment. 
+
+###[MagentoConnectKey](https://github.com/astorm/MagentoConnectKey)
+
+A bookmarket for extracting a Magento Connect key from a page. 
+
+###[MagentoTarToConnect](https://github.com/astorm/MagentoTarToConnect)
+
+A small shell script to automatically package tar archives into Magento's Connect 2.0 format. 
+
+###[MagentoXuacompatible](https://github.com/astorm/MagentoXuacompatible)
+
+A magento module to switch Internet Explorer into IE 8 compatibility mode, patching some JS/CSS problems in older Magento themes. 
+
+###[PulsestormLauncher](https://github.com/astorm/PulsestormLauncher)
+
+The fastest way to browse your Magento admin interface. 
+
+###[PulseStormModuleList](https://github.com/astorm/PulseStormModuleList)
+
+A Magento module that lists other installed modules. 
+
+###[SystemConfigurationSearch](https://github.com/astorm/SystemConfigurationSearch)
+
+A Magento module allowing users to quickly search for specific configuration fields, quickly cutting through the dense UI. 
