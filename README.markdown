@@ -57,7 +57,7 @@ A magento module to switch Internet Explorer into IE 8 compatibility mode, patch
 
 The fastest way to browse your Magento admin interface. 
 
-###[PulseStormModuleList](https://github.com/astorm/PulseStormModuleList)
+###[PulsestormModuleList](https://github.com/astorm/PulsestormModuleList)
 
 A Magento module that lists other installed modules. 
 
