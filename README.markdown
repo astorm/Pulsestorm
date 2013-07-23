@@ -64,3 +64,7 @@ A Magento module that lists other installed modules.
 ###[SystemConfigurationSearch](https://github.com/astorm/SystemConfigurationSearch)
 
 A Magento module allowing users to quickly search for specific configuration fields, quickly cutting through the dense UI. 
+
+###[MagentoTinyMCEConfig](https://github.com/astorm/MagentoTinyMCEConfig)
+
+A Magento module allowing system administrators to add additional TinyMCE settings.
