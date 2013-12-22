@@ -67,4 +67,8 @@ A Magento module allowing users to quickly search for specific configuration fie
 
 ###[MagentoTinyMCEConfig](https://github.com/astorm/MagentoTinyMCEConfig)
 
-A Magento module which allows system administrators to add additional TinyMCE settings.
+A Magento module allowing system administrators to add additional TinyMCE settings.
+
+###[MagentoBetter404](https://github.com/astorm/MagentoBetter404)
+
+A Magento module which gives developers a programmer's 404 page, allowing for easier routing debugging. 
